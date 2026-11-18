@@ -1,12 +1,9 @@
 "use client";
 
-import { Canvas, useThree } from "@react-three/fiber";
-import { useEffect, useRef } from "react";
-import * as THREE from "three";
+import { Canvas } from "@react-three/fiber";
 import { closeSection } from "@/lib/workshop/actions";
 import { rt } from "@/lib/workshop/runtime";
-import { setWorkshop, useWorkshop } from "@/lib/workshop/store";
-import CameraRig, { ISO } from "./CameraRig";
+import CameraRig from "./CameraRig";
 import DayCycle from "./DayCycle";
 import Interactive from "./Interactive";
 import { TagProjector } from "./Tags";
@@ -27,44 +24,6 @@ import Shelf from "./scene/Shelf";
 import WallClock from "./scene/WallClock";
 import Whiteboard from "./scene/Whiteboard";
 import Window from "./scene/Window";
-
-/** Captura el taller (encuadre del escritorio) para el Hero de la vista clásica. */
-function Snapshot() {
-  const { gl, scene, camera } = useThree();
-  const open = useWorkshop((s) => s.open);
-  const prev = useRef(open);
-
-  useEffect(() => {
-    const was = prev.current;
-    prev.current = open;
-    const take = () => {
-      const cam = camera as THREE.OrthographicCamera;
-      const saved = { p: cam.position.clone(), q: cam.quaternion.clone(), zoom: cam.zoom };
-      const t = new THREE.Vector3(0.3, 3.4, -4.6);
-      cam.position.copy(t).addScaledVector(ISO, 60);
-      cam.lookAt(t);
-      cam.zoom = 2.1;
-      cam.updateProjectionMatrix();
-      gl.render(scene, cam);
-      try {
-        setWorkshop({ preview: gl.domElement.toDataURL("image/jpeg", 0.85) });
-      } catch {
-        /* lienzo no disponible */
-      }
-      cam.position.copy(saved.p);
-      cam.quaternion.copy(saved.q);
-      cam.zoom = saved.zoom;
-      cam.updateProjectionMatrix();
-    };
-    // al cerrar el taller, cuando el lienzo ya no se ve (evita un fotograma con otro encuadre)
-    if (was && !open) {
-      const id = setTimeout(take, 600);
-      return () => clearTimeout(id);
-    }
-  }, [open, gl, scene, camera]);
-
-  return null;
-}
 
 export default function WorkshopCanvas({ running, onReady }: { running: boolean; onReady: () => void }) {
   return (
@@ -121,7 +80,6 @@ export default function WorkshopCanvas({ running, onReady }: { running: boolean;
       </Interactive>
 
       <TagProjector />
-      <Snapshot />
     </Canvas>
   );
 }

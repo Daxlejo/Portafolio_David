@@ -12,15 +12,13 @@ export type WorkshopState = {
   active: SectionId | null;
   /** Objeto bajo el cursor. */
   hovered: SectionId | null;
-  /** Captura del taller (data URL) para el Hero clásico. */
-  preview: string | null;
   /** Modo del taller (el tema de la UI cambia a mitad de la transición). */
   mode: "night" | "day";
   /** Comando que muestra el toast `david@taller:~$ …` */
   toast: { text: string; id: number } | null;
 };
 
-let state: WorkshopState = { available: false, open: false, active: null, hovered: null, preview: null, mode: "night", toast: null };
+let state: WorkshopState = { available: false, open: false, active: null, hovered: null, mode: "night", toast: null };
 const listeners = new Set<() => void>();
 
 export function getWorkshop(): WorkshopState {
