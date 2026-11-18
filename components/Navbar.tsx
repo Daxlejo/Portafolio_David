@@ -29,7 +29,7 @@ export default function Navbar() {
   return (
     <header className="glass sticky top-0 z-50 border-b border-line">
       <nav className="relative mx-auto flex h-[62px] max-w-[1180px] items-center gap-4 px-4 sm:px-6" aria-label="Secciones">
-        <a href="#inicio" className="flex items-center gap-3" aria-label={`${PROFILE.fullName}, ir al inicio`}>
+        <a href="#inicio" className="flex shrink-0 items-center gap-3 whitespace-nowrap" aria-label={`${PROFILE.fullName}, ir al inicio`}>
           <span className="grid h-[38px] w-[38px] place-items-center rounded-[10px] bg-accent font-mono text-[13px] font-semibold text-accent-ink">
             {PROFILE.initials}
           </span>
@@ -43,7 +43,7 @@ export default function Navbar() {
               <a
                 href={`#${l.id}`}
                 aria-current={active === l.id ? "true" : undefined}
-                className={`rounded-lg px-2.5 py-[7px] text-[13.5px] transition-colors ${
+                className={`rounded-lg px-2.5 py-[7px] text-[13.5px] whitespace-nowrap transition-colors ${
                   active === l.id ? "bg-accent-soft text-accent" : "text-muted hover:text-fg"
                 }`}
               >
@@ -53,10 +53,10 @@ export default function Navbar() {
           ))}
         </ul>
 
-        <div className="ml-auto flex items-center gap-2 xl:ml-0">
+        <div className="ml-auto flex shrink-0 items-center gap-2 xl:ml-0">
           <button
             onClick={() => window.dispatchEvent(new Event("open-palette"))}
-            className="btn hidden font-mono text-xs text-muted md:inline-flex"
+            className="btn hidden font-mono text-xs whitespace-nowrap text-muted md:inline-flex xl:hidden 2xl:inline-flex"
             aria-label="Abrir paleta de comandos"
           >
             <kbd>Ctrl K</kbd>
@@ -70,7 +70,7 @@ export default function Navbar() {
             {theme === "dark" ? <SunIcon /> : <MoonIcon />}
           </button>
           {canOpenWorkshop && (
-            <button onClick={openWorkshop} className="btn" title="Volver al taller 3D">
+            <button onClick={openWorkshop} className="btn whitespace-nowrap" title="Volver al taller 3D">
               <CubeIcon />
               <span className="hidden sm:inline">Taller 3D</span>
             </button>

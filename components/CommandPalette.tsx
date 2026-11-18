@@ -3,10 +3,15 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { NAV_LINKS, PROFILE } from "@/data/portfolio";
 import { toggleTheme } from "@/lib/theme";
+import { showClassic } from "@/lib/workshop/actions";
+import { getWorkshop, openWorkshop } from "@/lib/workshop/store";
 
 type Cmd = { id: string; label: string; hint: string; icon: string; run: () => void };
 
-const go = (id: string) => document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+const go = (id: string) => {
+  if (getWorkshop().open) showClassic();
+  setTimeout(() => document.getElementById(id)?.scrollIntoView({ behavior: "smooth" }), getWorkshop().open ? 550 : 0);
+};
 
 /** Paleta de comandos (Ctrl/⌘ + K) para navegar y ejecutar acciones rápidas. */
 export default function CommandPalette() {
@@ -18,8 +23,10 @@ export default function CommandPalette() {
   const commands: Cmd[] = useMemo(
     () => [
       ...NAV_LINKS.map((l) => ({ id: l.id, label: `Ir a ${l.label}`, hint: "Navegación", icon: "↪", run: () => go(l.id) })),
+      { id: "taller", label: "Entrar al taller 3D", hint: "Vista", icon: "🧊", run: () => (getWorkshop().available ? openWorkshop() : undefined) },
+      { id: "clasica", label: "Ver vista clásica", hint: "Vista", icon: "📖", run: () => showClassic() },
       { id: "cv", label: "Descargar CV", hint: "Acción", icon: "📄", run: () => window.open("/cv.pdf", "_blank") },
-      { id: "theme", label: "Cambiar tema claro / oscuro", hint: "Acción", icon: "🌓", run: () => toggleTheme() },
+      { id: "theme", label: "Cambiar modo día / noche", hint: "Acción", icon: "🌓", run: () => toggleTheme() },
       { id: "mail", label: "Copiar correo", hint: "Acción", icon: "✉️", run: () => navigator.clipboard?.writeText(PROFILE.email) },
       { id: "gh", label: "Abrir GitHub", hint: "Enlace", icon: "🐙", run: () => window.open(PROFILE.github, "_blank") },
       { id: "matrix", label: "Entrar a la Matrix", hint: "Secreto", icon: "🕶️", run: () => window.dispatchEvent(new Event("matrix")) },

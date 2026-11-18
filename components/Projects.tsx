@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { PROJECTS, type Project } from "@/data/portfolio";
-import { DownloadIcon, GithubIcon } from "./Icons";
+import { DownloadIcon, ExternalIcon, GithubIcon } from "./Icons";
 import Reveal, { SectionTitle } from "./Reveal";
 
 /** Botones del proyecto: descargas en sólido, repositorios con borde e ícono de GitHub, "próximamente" deshabilitado. */
@@ -14,10 +14,10 @@ export function ProjectLinks({ p }: { p: Project }) {
           href={l.href}
           target="_blank"
           rel="noreferrer"
-          className={`btn ${size} ${l.kind === "download" ? "btn-solid" : ""}`}
+          className={`btn ${size} ${l.kind === "download" ? "btn-solid" : l.kind === "demo" ? "btn-accent" : ""}`}
           aria-label={`${l.label}: ${p.title}`}
         >
-          {l.kind === "github" ? <GithubIcon className="h-4 w-4" /> : <DownloadIcon className="h-4 w-4" />}
+          {l.kind === "github" ? <GithubIcon className="h-4 w-4" /> : l.kind === "demo" ? <ExternalIcon className="h-4 w-4" /> : <DownloadIcon className="h-4 w-4" />}
           {l.label}
         </a>
       ))}

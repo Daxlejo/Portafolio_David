@@ -14,9 +14,13 @@ export type WorkshopState = {
   hovered: SectionId | null;
   /** Captura del taller (data URL) para el Hero clásico. */
   preview: string | null;
+  /** Modo del taller (el tema de la UI cambia a mitad de la transición). */
+  mode: "night" | "day";
+  /** Comando que muestra el toast `david@taller:~$ …` */
+  toast: { text: string; id: number } | null;
 };
 
-let state: WorkshopState = { available: false, open: false, active: null, hovered: null, preview: null };
+let state: WorkshopState = { available: false, open: false, active: null, hovered: null, preview: null, mode: "night", toast: null };
 const listeners = new Set<() => void>();
 
 export function getWorkshop(): WorkshopState {
@@ -50,3 +54,7 @@ export function useWorkshop<T>(select: (s: WorkshopState) => T): T {
 
 export const openWorkshop = () => setWorkshop({ open: true });
 export const closeWorkshop = () => setWorkshop({ open: false, active: null, hovered: null });
+
+let toastId = 0;
+/** Muestra `david@taller:~$ <comando>` durante 2.2 s. */
+export const say = (text: string) => setWorkshop({ toast: { text, id: ++toastId } });

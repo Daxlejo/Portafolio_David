@@ -62,3 +62,4 @@ export const PlayIcon = ({ className = "h-5 w-5" }: P) => (
 export const PauseIcon = ({ className = "h-5 w-5" }: P) => (
   <svg viewBox="0 0 24 24" fill="currentColor" className={className} aria-hidden><path d="M7 5h4v14H7zM13 5h4v14h-4z" /></svg>
 );
+export const ExternalIcon = (p: P) => <Line {...p}><path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5" /></Line>;

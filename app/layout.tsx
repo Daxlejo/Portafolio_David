@@ -51,8 +51,13 @@ export const viewport: Viewport = {
   ],
 };
 
-// Aplica el tema guardado antes de pintar (evita parpadeo)
-const themeScript = `try{var t=localStorage.getItem('theme');if(t)document.documentElement.dataset.theme=t;}catch(e){}`;
+// Antes de pintar: aplica el tema guardado y decide si el taller 3D se muestra
+// (hay WebGL, no se pidió #clasica, sin reduced motion ni conexión lenta). Evita parpadeos.
+const themeScript = `(function(){var d=document.documentElement;try{var t=localStorage.getItem('theme');if(t)d.dataset.theme=t;}catch(e){}
+var gl=false;try{var c=document.createElement('canvas');gl=!!(c.getContext('webgl2')||c.getContext('webgl'));}catch(e){}
+d.dataset.webgl=gl?'1':'0';var n=navigator.connection,slow=!!(n&&(n.saveData||/2g/.test(n.effectiveType||'')));
+var rm=matchMedia('(prefers-reduced-motion: reduce)').matches;
+d.dataset.workshop=(gl&&!slow&&!rm&&location.hash!=='#clasica')?'open':'closed';})();`;
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (

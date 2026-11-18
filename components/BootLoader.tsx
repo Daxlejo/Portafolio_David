@@ -18,7 +18,8 @@ export default function BootLoader() {
   const [hiding, setHiding] = useState(false);
 
   useEffect(() => {
-    if (sessionStorage.getItem("booted")) {
+    // El taller 3D tiene su propia pantalla de arranque
+    if (document.documentElement.dataset.workshop === "open" || sessionStorage.getItem("booted")) {
       // eslint-disable-next-line react-hooks/set-state-in-effect
       setVisible(false);
       return;

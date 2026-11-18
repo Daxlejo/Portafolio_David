@@ -317,6 +317,44 @@ body {
 
 }
 
+/* ---------- Taller 3D (capa fija sobre la vista clásica) ---------- */
+.ws-root {
+  position: fixed;
+  inset: 0;
+  z-index: 70;
+  overflow: hidden;
+  background: var(--bg);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(28px);
+  transition: opacity 0.5s, transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1), visibility 0s 0.5s, background-color 0.8s;
+}
+html[data-workshop="open"] .ws-root {
+  opacity: 1;
+  visibility: visible;
+  transform: none;
+  transition: opacity 0.5s, transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1), background-color 0.8s;
+}
+html[data-workshop="open"] body { overflow: hidden; }
+/* en el taller no se ve el resplandor del cursor de la vista clásica */
+html[data-workshop="open"] .cursor-glow { display: none; }
+
+.ws-panel {
+  transform: translateX(105%);
+  transition: transform 0.55s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.ws-panel[data-open="true"] { transform: none; }
+@media (max-width: 760px) {
+  .ws-panel { transform: translateY(105%); }
+}
+
+.ws-toast {
+  opacity: 0;
+  transform: translate(-50%, -8px);
+  transition: opacity 0.35s, transform 0.35s;
+}
+.ws-toast[data-on="true"] { opacity: 1; transform: translate(-50%, 0); }
+
 @keyframes blink { 50% { opacity: 0; } }
 @keyframes floaty { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
 @keyframes ping-ring {

@@ -195,8 +195,11 @@ export const PROJECTS: Project[] = [
       "Arquitectura por capas y uso eficiente de la IA",
     ],
     tech: ["Wear OS", "OpenAI API", "Geolocalización", "Arquitectura por capas"],
-    links: [{ kind: "github", label: "Repositorio", href: "https://github.com/Daxlejo/ExplorIA" }],
-    soon: ["Demo en Vercel · próximamente"],
+    links: [
+      { kind: "github", label: "Repositorio", href: "https://github.com/Daxlejo/ExplorIA" },
+      { kind: "demo", label: "Demo en vivo", href: "https://exploria-web-ebon.vercel.app/" },
+    ],
+    soon: [],
   },
 ];
 

@@ -10,11 +10,14 @@ import TerminalPlayground from "@/components/TerminalPlayground";
 import Footer from "@/components/Footer";
 import BootLoader from "@/components/BootLoader";
 import CommandPalette from "@/components/CommandPalette";
+import WorkshopOverlay from "@/components/workshop/WorkshopOverlay";
 import { ConstellationBg, CursorGlow, FxTracker, KonamiMatrix, ScrollProgress } from "@/components/Effects";
 
 export default function Home() {
   return (
     <>
+      <WorkshopOverlay />            {/* Taller 3D: capa fija a pantalla completa, visible por defecto */}
+
       {/* Extras */}
       <BootLoader />
       <ScrollProgress />
