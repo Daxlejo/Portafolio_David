@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { ABOUT, PROFILE, SKILLS } from "@/data/portfolio";
+import { ABOUT, PROFILE } from "@/data/portfolio";
 import Reveal, { SectionTitle } from "./Reveal";
 
 function Counter({ value, suffix }: { value: number; suffix: string }) {
@@ -35,7 +35,7 @@ export default function About() {
   return (
     <section id="sobre-mi" className="relative py-24">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <SectionTitle kicker="01. sobre_mi" title="Sobre mí" subtitle="Lorem ipsum dolor sit amet, consectetur adipiscing elit." />
+        <SectionTitle kicker="01. sobre_mi" title="Sobre mí" subtitle="Clean Architecture, buenas prácticas y soluciones efectivas en software." />
 
         <div className="grid items-start gap-10 lg:grid-cols-2">
           {/* Tarjeta tipo código */}
@@ -50,23 +50,16 @@ export default function About() {
               <pre className="overflow-x-auto p-6 leading-7">
                 <code>
                   <span className="text-pink-400">const</span> <span className="text-sky-400">yo</span> = {"{"}
-                  {"\n"}  nombre: <span className="text-amber-300">&quot;{PROFILE.firstName}&quot;</span>,
-                  {"\n"}  rol: <span className="text-amber-300">&quot;{PROFILE.roles[0]}&quot;</span>,
+                  {"\n"}  nombre: <span className="text-amber-300">&quot;{PROFILE.fullName}&quot;</span>,
                   {"\n"}  ubicacion: <span className="text-amber-300">&quot;{PROFILE.location}&quot;</span>,
-                  {"\n"}  stack: [
-                  {SKILLS.slice(0, 4).map((s, i) => (
-                    <span key={s.name}>
-                      <span className="text-amber-300">&quot;{s.name}&quot;</span>
-                      {i < 3 ? ", " : ""}
-                    </span>
-                  ))}
-                  ],
+                  {"\n"}  arquitectura: <span className="text-amber-300">&quot;Clean Architecture&quot;</span>,
+                  {"\n"}  buenasPracticas: <span className="text-accent">true</span>,
                   {"\n"}  cafe: <span className="text-accent">Infinity</span>,
                   {"\n"}  aprendiendo: <span className="text-accent">true</span>,
                   {"\n"}
                   {"};"}
                   {"\n\n"}
-                  <span className="text-muted">{"// Lorem ipsum dolor sit amet ✨"}</span>
+                  <span className="text-muted">{"// Soluciones efectivas mobile, web y escritorio ✨"}</span>
                 </code>
               </pre>
             </div>
@@ -85,7 +78,6 @@ export default function About() {
 
           <Reveal delay={150}>
             <div className="flex items-center gap-5">
-              {/* Foto / ilustración: reemplázala por una imagen en public/images */}
               <div className="border-spin shrink-0 rounded-2xl p-[2px]">
                 <div className="grid h-20 w-20 place-items-center rounded-2xl bg-surface-2 text-5xl">🙋‍♂️</div>
               </div>
@@ -117,15 +109,6 @@ export default function About() {
                   style={{ transitionDelay: `${i * 10}ms` }}
                 >
                   #{t}
-                </span>
-              ))}
-            </div>
-
-            <h4 className="mt-8 mb-3 font-mono text-sm text-accent">{"> tecnologias"}</h4>
-            <div className="flex flex-wrap gap-2">
-              {SKILLS.map((s) => (
-                <span key={s.name} className="rounded-md border border-line px-2.5 py-1 font-mono text-xs text-muted">
-                  {s.icon} {s.name}
                 </span>
               ))}
             </div>

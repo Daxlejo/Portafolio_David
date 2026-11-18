@@ -1,5 +1,5 @@
 /* =========================================================
-   Datos tipados del portafolio (todo el texto es Lorem ipsum)
+   Datos tipados del portafolio
    ========================================================= */
 
 export type NavLink = { id: string; label: string };
@@ -9,7 +9,7 @@ export type Project = {
   description: string;
   emoji: string;
   gradient: string;
-  category: "Web" | "Móvil" | "IA" | "Juegos";
+  category: "Web" | "Móvil" | "IA" | "Escritorio";
   solutions: string[];
   tech: string[];
   github: string;
@@ -33,19 +33,19 @@ export type Experience = {
   tags: string[];
 };
 
-export type Skill = { name: string; level: number; group: string; icon: string };
+export type Skill = { name: string; group: string; icon: string };
 
 export const PROFILE = {
-  initials: "LI",
-  firstName: "Lorem Ipsum",
-  lastName: "Dolor Sit",
-  roles: ["Lorem Developer", "Ipsum Engineer", "Dolor Designer", "Sit Amet Creator"],
+  initials: "DC",
+  firstName: "David Alejandro",
+  lastName: "Cabezas Perez",
+  fullName: "David Alejandro Cabezas Perez",
   tagline:
-    "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-  email: "lorem@ipsum.com",
-  emailAlt: "dolor.sit@amet.com",
+    "Desarrollador de software enfocado en la construcción de soluciones integrales en entornos web, mobile y de escritorio. Apasionado por la Clean Architecture, las buenas prácticas y el desarrollo de sistemas robustos, escalables y verdaderamente efectivos.",
+  email: "david.cabezas@correo.com",
+  emailAlt: "david.dev@lorem.com",
   phone: "+57 300 000 0000",
-  location: "Lorem, Ipsum",
+  location: "Pasto, Nariño, Colombia",
   github: "https://github.com/",
   linkedin: "https://www.linkedin.com/",
   instagram: "https://www.instagram.com/",
@@ -65,88 +65,38 @@ export const NAV_LINKS: NavLink[] = [
 
 export const ABOUT = {
   paragraphs: [
-    "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio praesent libero, sed cursus ante dapibus diam. Sed nisi nulla quis sem at nibh elementum imperdiet.",
-    "Duis sagittis ipsum praesent mauris. Fusce nec tellus sed augue semper porta. Mauris massa vestibulum lacinia arcu eget nulla. Class aptent taciti sociosqu ad litora torquent.",
+    "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Me enfoco en desarrollar software con bases sólidas, código mantenible y arquitectura limpia.",
+    "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Apasionado por resolver problemas técnicos complejos y generar soluciones prácticas que aporten valor real.",
   ],
   facts: [
-    { icon: "📍", label: "Lorem, Ipsum" },
-    { icon: "🎓", label: "Lorem semestre" },
-    { icon: "☕", label: "Dolor sit amet" },
-    { icon: "🎮", label: "Consectetur" },
+    { icon: "📍", label: "Pasto, Nariño, Colombia" },
+    { icon: "🎓", label: "Ingeniería de Software" },
+    { icon: "☕", label: "Café & Clean Code" },
+    { icon: "💻", label: "Web · Mobile · Desktop" },
   ],
-  interests: ["Lorem", "Ipsum", "Dolor", "Sit amet", "Consectetur", "Adipiscing", "Elit"],
+  interests: ["Clean Architecture", "Buenas Prácticas", "Mobile Dev", "Web Dev", "Sistemas de Escritorio", "Soluciones Efectivas", "UI/UX"],
   stats: [
-    { value: 12, suffix: "+", label: "Lorem proyectos" },
-    { value: 3, suffix: "", label: "Ipsum años" },
-    { value: 15, suffix: "+", label: "Dolor tecnologías" },
+    { value: 10, suffix: "+", label: "Soluciones creadas" },
+    { value: 3, suffix: "", label: "Años creando código" },
+    { value: 12, suffix: "+", label: "Tecnologías dominadas" },
     { value: 999, suffix: "", label: "Tazas de café" },
   ],
 };
 
 export const PROJECTS: Project[] = [
   {
-    title: "Lorem Calculator",
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit sed do eiusmod.",
-    emoji: "🧮",
+    title: "Estudy-AI",
+    description:
+      "Plataforma inteligente impulsada por IA diseñada para optimizar los métodos de estudio, generación adaptativa de resúmenes estructurados y asistencia académica contextualizada.",
+    emoji: "🧠",
     gradient: "from-emerald-500/30 to-cyan-500/20",
-    category: "Web",
-    solutions: ["Lorem ipsum dolor sit", "Consectetur adipiscing elit", "Sed do eiusmod tempor"],
-    tech: ["Next.js", "TypeScript", "Three.js"],
-    github: "https://github.com/",
-    demo: "https://vercel.com/",
-  },
-  {
-    title: "Ipsum Mobile",
-    description: "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.",
-    emoji: "📱",
-    gradient: "from-lime-500/30 to-emerald-500/20",
-    category: "Móvil",
-    solutions: ["Nisi ut aliquip ex ea", "Commodo consequat duis", "Aute irure dolor"],
-    tech: ["Flutter", "Firebase", "IoT"],
-    github: "https://github.com/",
-    demo: "https://vercel.com/",
-  },
-  {
-    title: "Dolor Player",
-    description: "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum.",
-    emoji: "🎧",
-    gradient: "from-teal-500/30 to-green-500/20",
-    category: "Web",
-    solutions: ["Velit esse cillum dolore", "Eu fugiat nulla pariatur", "Excepteur sint occaecat"],
-    tech: ["React", "API REST", "Tailwind"],
-    github: "https://github.com/",
-    demo: "https://vercel.com/",
-  },
-  {
-    title: "Sit Amet AI",
-    description: "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia.",
-    emoji: "🤖",
-    gradient: "from-green-500/30 to-sky-500/20",
     category: "IA",
-    solutions: ["Cupidatat non proident", "Sunt in culpa qui", "Officia deserunt mollit"],
-    tech: ["Python", "Flask", "NLP"],
-    github: "https://github.com/",
-    demo: "https://vercel.com/",
-  },
-  {
-    title: "Consectetur Quest",
-    description: "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium.",
-    emoji: "👾",
-    gradient: "from-emerald-500/30 to-fuchsia-500/20",
-    category: "Juegos",
-    solutions: ["Perspiciatis unde omnis", "Iste natus error sit", "Voluptatem accusantium"],
-    tech: ["Unity", "C#", "Pixel Art"],
-    github: "https://github.com/",
-    demo: "https://vercel.com/",
-  },
-  {
-    title: "Adipiscing Market",
-    description: "Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit.",
-    emoji: "🛒",
-    gradient: "from-cyan-500/30 to-emerald-500/20",
-    category: "Web",
-    solutions: ["Nemo enim ipsam", "Quia voluptas sit", "Aspernatur aut odit"],
-    tech: ["Spring Boot", "PostgreSQL", "AWS"],
+    solutions: [
+      "Generación inteligente de resúmenes contextuales y tarjetas de estudio interactivas",
+      "Asistente conversacional adaptativo con procesamiento de documentos académicos",
+      "Diseño fundamentado en Clean Architecture, alta escalabilidad y experiencia fluida",
+    ],
+    tech: ["Next.js", "TypeScript", "Tailwind CSS", "OpenAI / Gemini API", "Clean Architecture"],
     github: "https://github.com/",
     demo: "https://vercel.com/",
   },
@@ -155,30 +105,30 @@ export const PROJECTS: Project[] = [
 export const TESTIMONIALS: Testimonial[] = [
   {
     name: "Lorem Ipsum",
-    role: "Profesor · Lorem University",
+    role: "Profesor · Universidad",
     avatar: "👨‍🏫",
-    text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+    text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Gran capacidad para estructurar proyectos con Clean Architecture y buenas prácticas de desarrollo.",
     rating: 5,
   },
   {
     name: "Dolor Sit",
-    role: "Compañera · Proyecto Ipsum",
+    role: "Compañera de equipo",
     avatar: "👩‍🎓",
-    text: "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+    text: "Ut enim ad minim veniam, trabajar en equipo en soluciones web y mobile fue una experiencia excelente por su enfoque en código limpio.",
     rating: 5,
   },
   {
     name: "Amet Consectetur",
-    role: "Cliente · Dolor S.A.S.",
+    role: "Cliente · Soluciones Tech",
     avatar: "🧑‍💼",
-    text: "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
-    rating: 4,
+    text: "Duis aute irure dolor in reprehenderit. Entregó una solución de software altamente efectiva, rápida y con una interfaz muy bien cuidada.",
+    rating: 5,
   },
   {
     name: "Adipiscing Elit",
-    role: "Líder técnico · Sit Amet Labs",
+    role: "Líder técnico",
     avatar: "👩‍💻",
-    text: "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+    text: "Excepteur sint occaecat cupidatat non proident. Destaca por su compromiso con los estándares de calidad y resolución efectiva de problemas.",
     rating: 5,
   },
 ];
@@ -187,62 +137,66 @@ export const EXPERIENCES: Experience[] = [
   {
     type: "academica",
     period: "2023 – Actualidad",
-    title: "Lorem Ipsum Engineering",
-    place: "Universidad Lorem Ipsum",
-    points: ["Lorem ipsum dolor sit amet consectetur", "Adipiscing elit sed do eiusmod tempor"],
-    tags: ["Lorem", "Ipsum", "Dolor"],
+    title: "Ingeniería de Software",
+    place: "Universidad · Pasto, Colombia",
+    points: [
+      "Formación en ingeniería de software, arquitectura de sistemas y metodologías ágiles",
+      "Aplicación de Clean Architecture, patrones de diseño y estándares de calidad",
+    ],
+    tags: ["Clean Architecture", "Buenas Prácticas", "Full-Stack"],
   },
   {
     type: "academica",
     period: "2022",
-    title: "Curso de Dolor Sit",
-    place: "Instituto Amet Consectetur",
-    points: ["Ut enim ad minim veniam quis nostrud", "Exercitation ullamco laboris nisi"],
-    tags: ["Sit", "Amet"],
-  },
-  {
-    type: "academica",
-    period: "2021",
-    title: "Bachiller Lorem",
-    place: "Colegio Ipsum Dolor",
-    points: ["Duis aute irure dolor in reprehenderit"],
-    tags: ["Consectetur"],
+    title: "Cursos y Certificaciones Especializadas",
+    place: "Plataformas de Desarrollo y Tecnología",
+    points: [
+      "Desarrollo de aplicaciones móviles y soluciones web escalables",
+      "Estructuras de datos avanzadas y diseño de APIs robustas",
+    ],
+    tags: ["Mobile", "Web", "APIs"],
   },
   {
     type: "laboral",
     period: "2025 – Actualidad",
-    title: "Lorem Developer Jr.",
-    place: "Ipsum Tech S.A.S.",
-    points: ["Lorem ipsum dolor sit amet elit", "Sed do eiusmod tempor incididunt ut labore"],
-    tags: ["Next.js", "TypeScript"],
+    title: "Desarrollador de Software",
+    place: "Proyectos y Soluciones Digitales",
+    points: [
+      "Diseño y construcción de soluciones web, móviles y de escritorio orientadas a resultados",
+      "Implementación de arquitecturas limpias, modulares y de alto rendimiento",
+    ],
+    tags: ["Next.js", "TypeScript", "Mobile", "Desktop"],
   },
   {
     type: "laboral",
     period: "2024",
-    title: "Freelance Dolor",
-    place: "Sit Amet Studio",
-    points: ["Ut enim ad minim veniam", "Quis nostrud exercitation ullamco"],
-    tags: ["React", "Tailwind"],
+    title: "Desarrollador Independiente",
+    place: "Soluciones de Software",
+    points: [
+      "Creación de aplicativos funcionales y efectivos para diversos requerimientos",
+      "Optimización de flujos de trabajo e interfaces intuitivas para usuarios finales",
+    ],
+    tags: ["React", "Tailwind", "Clean Code"],
   },
 ];
 
 export const SKILLS: Skill[] = [
-  { name: "Next.js", level: 85, group: "Frontend", icon: "▲" },
-  { name: "React", level: 88, group: "Frontend", icon: "⚛️" },
-  { name: "TypeScript", level: 80, group: "Frontend", icon: "🟦" },
-  { name: "Tailwind", level: 90, group: "Frontend", icon: "🌊" },
-  { name: "Node.js", level: 75, group: "Backend", icon: "🟩" },
-  { name: "Python", level: 78, group: "Backend", icon: "🐍" },
-  { name: "Spring Boot", level: 65, group: "Backend", icon: "🍃" },
-  { name: "PostgreSQL", level: 70, group: "Datos", icon: "🐘" },
-  { name: "MongoDB", level: 72, group: "Datos", icon: "🍃" },
-  { name: "Docker", level: 60, group: "DevOps", icon: "🐳" },
-  { name: "Git / GitHub", level: 88, group: "DevOps", icon: "🐙" },
-  { name: "Vercel", level: 85, group: "DevOps", icon: "▲" },
+  { name: "Next.js", group: "Frontend", icon: "▲" },
+  { name: "React", group: "Frontend", icon: "⚛️" },
+  { name: "TypeScript", group: "Frontend", icon: "🟦" },
+  { name: "Tailwind CSS", group: "Frontend", icon: "🌊" },
+  { name: "Node.js", group: "Backend", icon: "🟩" },
+  { name: "Python", group: "Backend", icon: "🐍" },
+  { name: "APIs REST", group: "Backend", icon: "⚡" },
+  { name: "PostgreSQL", group: "Datos", icon: "🐘" },
+  { name: "MongoDB", group: "Datos", icon: "🍃" },
+  { name: "Git / GitHub", group: "DevOps & Arquitectura", icon: "🐙" },
+  { name: "Clean Architecture", group: "DevOps & Arquitectura", icon: "📐" },
+  { name: "Vercel", group: "DevOps & Arquitectura", icon: "▲" },
 ];
 
 export const LANGUAGES = [
-  { name: "Lorem (nativo)", level: 100 },
-  { name: "Ipsum", level: 70 },
-  { name: "Dolor", level: 35 },
+  { name: "Español", level: "Nativo" },
+  { name: "Inglés", level: "Técnico / B2" },
+  { name: "Lorem", level: "Fluido" },
 ];

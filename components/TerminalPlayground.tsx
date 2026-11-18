@@ -64,7 +64,7 @@ export default function TerminalPlayground() {
           </div>
         );
       case "whoami":
-        return `${PROFILE.firstName} ${PROFILE.lastName} — ${PROFILE.roles[0]}`;
+        return `${PROFILE.fullName} — ${PROFILE.location}`;
       case "about":
         return ABOUT.paragraphs[0];
       case "projects":
@@ -80,14 +80,11 @@ export default function TerminalPlayground() {
         );
       case "skills":
         return (
-          <div className="space-y-0.5">
+          <div className="flex flex-wrap gap-2 py-1">
             {SKILLS.map((s) => (
-              <div key={s.name} className="flex gap-3">
-                <span className="w-28 shrink-0">{s.name}</span>
-                <span className="text-accent">{"█".repeat(Math.round(s.level / 10))}</span>
-                <span className="text-line">{"░".repeat(10 - Math.round(s.level / 10))}</span>
-                <span className="text-muted">{s.level}%</span>
-              </div>
+              <span key={s.name} className="rounded border border-line bg-white/5 px-2.5 py-1 text-xs text-accent">
+                {s.icon} {s.name}
+              </span>
             ))}
           </div>
         );

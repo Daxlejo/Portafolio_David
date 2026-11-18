@@ -15,27 +15,29 @@ endobj
 << /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold >>
 endobj
 6 0 obj
-<< /Length 1218 >>
+<< /Length 1606 >>
 stream
 BT
-/F2 26 Tf 1 0 0 1 60 780 Tm (Lorem Ipsum Dolor Sit) Tj
-/F1 14 Tf 1 0 0 1 60 744 Tm (Lorem Developer) Tj
-/F1 11 Tf 1 0 0 1 60 720 Tm (lorem@ipsum.com  |  +57 300 000 0000  |  Lorem, Ipsum) Tj
-/F1 11 Tf 1 0 0 1 60 699 Tm () Tj
-/F2 14 Tf 1 0 0 1 60 678 Tm (Perfil) Tj
-/F1 11 Tf 1 0 0 1 60 654 Tm (Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod) Tj
-/F1 11 Tf 1 0 0 1 60 633 Tm (tempor incididunt ut labore et dolore magna aliqua.) Tj
-/F1 11 Tf 1 0 0 1 60 612 Tm () Tj
-/F2 14 Tf 1 0 0 1 60 591 Tm (Experiencia) Tj
-/F1 11 Tf 1 0 0 1 60 567 Tm (2025 - Actualidad  Lorem Developer Jr. - Ipsum Tech S.A.S.) Tj
-/F1 11 Tf 1 0 0 1 60 546 Tm (2024               Freelance Dolor - Sit Amet Studio) Tj
-/F1 11 Tf 1 0 0 1 60 525 Tm () Tj
-/F2 14 Tf 1 0 0 1 60 504 Tm (Educacion) Tj
-/F1 11 Tf 1 0 0 1 60 480 Tm (2023 - Actualidad  Lorem Ipsum Engineering - Universidad Lorem Ipsum) Tj
-/F1 11 Tf 1 0 0 1 60 459 Tm (2022               Curso de Dolor Sit - Instituto Amet Consectetur) Tj
-/F1 11 Tf 1 0 0 1 60 438 Tm () Tj
-/F2 14 Tf 1 0 0 1 60 417 Tm (Habilidades) Tj
-/F1 11 Tf 1 0 0 1 60 393 Tm (Next.js, React, TypeScript, Tailwind CSS, Node.js, Python, Git, Vercel) Tj
+/F2 24 Tf 1 0 0 1 60 780 Tm (David Alejandro Cabezas Perez) Tj
+/F1 13 Tf 1 0 0 1 60 747 Tm (Desarrollador de Software | Mobile, Web & Desktop) Tj
+/F1 10 Tf 1 0 0 1 60 725 Tm (Pasto, Narino, Colombia  |  david.cabezas@correo.com  |  github.com/) Tj
+/F1 10 Tf 1 0 0 1 60 706 Tm () Tj
+/F2 13 Tf 1 0 0 1 60 687 Tm (Perfil Profesional) Tj
+/F1 10 Tf 1 0 0 1 60 665 Tm (Desarrollador de software enfocado en la construccion de soluciones efectivas en) Tj
+/F1 10 Tf 1 0 0 1 60 646 Tm (entornos web, mobile y escritorio. Apasionado por la Clean Architecture, las) Tj
+/F1 10 Tf 1 0 0 1 60 627 Tm (buenas practicas de desarrollo y el diseno de sistemas mantenibles y escalables.) Tj
+/F1 10 Tf 1 0 0 1 60 608 Tm () Tj
+/F2 13 Tf 1 0 0 1 60 589 Tm (Proyecto Destacado) Tj
+/F1 10 Tf 1 0 0 1 60 567 Tm (Estudy-AI - Plataforma impulsada por IA para optimizar metodos de estudio,) Tj
+/F1 10 Tf 1 0 0 1 60 548 Tm (generacion de resumenes adaptativos y asistencia academica contextualizada.) Tj
+/F1 10 Tf 1 0 0 1 60 529 Tm (Stack: Next.js, TypeScript, Tailwind CSS, Clean Architecture, AI APIs.) Tj
+/F1 10 Tf 1 0 0 1 60 510 Tm () Tj
+/F2 13 Tf 1 0 0 1 60 491 Tm (Educacion) Tj
+/F1 10 Tf 1 0 0 1 60 469 Tm (2023 - Actualidad  Ingenieria de Software - Pasto, Colombia) Tj
+/F1 10 Tf 1 0 0 1 60 450 Tm (2022               Formacion en Desarrollo Mobile, Web y Clean Code) Tj
+/F1 10 Tf 1 0 0 1 60 431 Tm () Tj
+/F2 13 Tf 1 0 0 1 60 412 Tm (Competencias y Tecnologias) Tj
+/F1 10 Tf 1 0 0 1 60 390 Tm (Next.js, React, TypeScript, Node.js, Python, PostgreSQL, MongoDB, Clean Architecture) Tj
 ET
 0 0.8 0.3 RG 3 w 60 742 m 535 742 l S
 endstream
@@ -52,5 +54,5 @@ xref
 trailer
 << /Size 7 /Root 1 0 R >>
 startxref
-1665
+2053
 %%EOF

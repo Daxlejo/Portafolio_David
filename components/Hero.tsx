@@ -1,37 +1,8 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { PROFILE } from "@/data/portfolio";
 import { GithubIcon, LinkedinIcon, MailIcon } from "./Icons";
-
-/** Texto que se escribe y borra en bucle. */
-function useTypewriter(words: string[], speed = 80, pause = 1600) {
-  const [text, setText] = useState("");
-  const [i, setI] = useState(0);
-  const [del, setDel] = useState(false);
-
-  useEffect(() => {
-    const word = words[i % words.length];
-    const t = setTimeout(
-      () => {
-        if (!del) {
-          setText(word.slice(0, text.length + 1));
-          if (text.length + 1 === word.length) setTimeout(() => setDel(true), pause);
-        } else {
-          setText(word.slice(0, text.length - 1));
-          if (text.length - 1 === 0) {
-            setDel(false);
-            setI((n) => n + 1);
-          }
-        }
-      },
-      del ? speed / 2 : speed
-    );
-    return () => clearTimeout(t);
-  }, [text, del, i, words, speed, pause]);
-
-  return text;
-}
 
 /** Red de partículas interactiva que reacciona al cursor. */
 function ParticleField() {
@@ -130,8 +101,6 @@ function ParticleField() {
 }
 
 export default function Hero() {
-  const role = useTypewriter(PROFILE.roles);
-
   return (
     <section id="inicio" className="relative -mt-16 flex min-h-screen items-center overflow-hidden pt-16">
       <div className="grid-bg absolute inset-0 opacity-40" />
@@ -146,7 +115,7 @@ export default function Hero() {
               <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent opacity-75" />
               <span className="relative inline-flex h-2 w-2 rounded-full bg-accent" />
             </span>
-            Disponible para lorem ipsum
+            Disponible para nuevos retos
           </p>
           <p className="mb-2 text-lg text-muted">👋 Hola que tal, soy</p>
           <h1 className="text-4xl font-extrabold leading-tight sm:text-6xl lg:text-7xl">
@@ -154,11 +123,10 @@ export default function Hero() {
             <br />
             <span className="text-gradient">{PROFILE.lastName}</span>
           </h1>
-          <p className="mt-4 h-8 font-mono text-xl text-accent sm:text-2xl">
-            <span className="text-muted">&gt; </span>
-            <span className="caret">{role}</span>
+
+          <p className="mx-auto mt-6 max-w-xl text-base leading-relaxed text-muted lg:mx-0 sm:text-lg">
+            {PROFILE.tagline}
           </p>
-          <p className="mx-auto mt-6 max-w-xl text-muted lg:mx-0">{PROFILE.tagline}</p>
 
           <div className="mt-8 flex flex-wrap justify-center gap-4 lg:justify-start">
             <a
@@ -207,13 +175,13 @@ export default function Hero() {
             </div>
           </div>
           <span className="glass absolute -left-6 top-8 animate-float rounded-xl border border-line px-3 py-2 font-mono text-xs text-accent [animation-delay:-2s]">
-            {"<Lorem />"}
+            {"<CleanArchitecture />"}
           </span>
           <span className="glass absolute -right-4 top-1/2 animate-float rounded-xl border border-line px-3 py-2 font-mono text-xs [animation-delay:-4s]">
-            ⚡ ipsum.ts
+            ⚡ mobile & web
           </span>
           <span className="glass absolute bottom-4 left-0 animate-float rounded-xl border border-line px-3 py-2 font-mono text-xs [animation-delay:-1s]">
-            🚀 deploy: <span className="text-accent">ok</span>
+            🚀 desktop: <span className="text-accent">ready</span>
           </span>
         </div>
       </div>

@@ -14,8 +14,9 @@ const jetbrains = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Lorem Ipsum · Desarrollador de Software",
-  description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Portafolio personal.",
+  title: "David Alejandro Cabezas Perez · Desarrollador de Software",
+  description:
+    "Portafolio de David Alejandro Cabezas Perez. Soluciones de software en entornos mobile, web y de escritorio con Clean Architecture y buenas prácticas.",
 };
 
 // Aplica el tema guardado antes de pintar (evita parpadeo)
