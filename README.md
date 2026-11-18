@@ -1,12 +1,34 @@
-# Portafolio · Next.js + TypeScript + Tailwind CSS
+# El taller de David · Portafolio
 
-Portafolio personal (textos en *Lorem ipsum*) listo para desplegar en **Vercel**.
+Portafolio de **David Alejandro Cabezas Perez**, estudiante de Ingeniería de Software
+(Universidad Cooperativa de Colombia, Pasto). Hecho con **Next.js 16 + TypeScript +
+Tailwind CSS 4** y **React Three Fiber**.
+
+Repositorio: <https://github.com/Daxlejo/Portafolio_David>
+
+La página tiene dos vistas en `app/page.tsx`:
+
+1. **Taller 3D (portada):** un cuarto isométrico de noche donde un ingeniero trabaja en su
+   escritorio. Cada objeto abre una sección en un panel lateral. Botón sol/luna para pasar
+   de noche a día (3 s, con amanecer sobre el Galeras).
+2. **Vista clásica:** la página con scroll y la estructura del curso. Siempre está en el
+   HTML (SEO y lectores de pantalla); el taller va encima como una capa.
+
+| Enlace | Qué abre |
+|---|---|
+| `/` | Taller 3D |
+| `/#clasica` | Vista clásica directamente |
+| `/#proyectos`, `/#sobre-mi`, `/#contacto`… | Taller con esa sección enfocada |
+
+Sin WebGL, con `prefers-reduced-motion: reduce` o con conexión lenta se muestra la vista
+clásica (con un botón "Taller 3D" si hay WebGL).
 
 ## Ejecutar
 
 ```bash
 npm install
 npm run dev      # http://localhost:3000
+npm run lint
 npm run build    # compilación de producción
 ```
 
@@ -14,39 +36,54 @@ npm run build    # compilación de producción
 
 ```
 app/
-  layout.tsx        # fuentes, <html class="scroll-smooth">, tema
-  page.tsx          # une todas las secciones en orden
-  globals.css       # tema (variables), animaciones
+  layout.tsx            # fuentes, metadata/Open Graph, script previo (tema + taller)
+  page.tsx              # taller encima + secciones de la vista clásica en orden
+  globals.css           # paleta (noche / día), efectos .fx, capa del taller
 components/
-  Navbar.tsx        # 1. Menú sticky + hamburguesa + scroll-spy
-  Hero.tsx          # 2. Bienvenida + botón Descargar CV
-  About.tsx         # 3. Acerca de mí
-  Projects.tsx      # 4. Proyectos (GitHub + Demo)
-  Testimonials.tsx  # 5. Testimonios (carrusel, 4)
-  Experience.tsx    # 6. Experiencia académica y laboral
-  Contact.tsx       # 7. Contacto + formulario validado
-  Skills.tsx        # ⭐ Extra: habilidades e idiomas
-  TerminalPlayground.tsx # ⭐ Extra: terminal interactiva
-  Footer.tsx        # 8. Pie de página + volver arriba
-  BootLoader.tsx, CommandPalette.tsx, Effects.tsx  # extras
-data/portfolio.ts   # todos los datos tipados (edita aquí tu info)
-public/cv.pdf       # reemplázalo por tu hoja de vida
+  Navbar.tsx            # 1. Menú sticky, hamburguesa, sección activa, "Taller 3D"
+  Hero.tsx              # 2. Bienvenida + Descargar CV + captura del taller
+  About.tsx             # 3. Sobre mí, datos rápidos, estadísticas, barbería
+  Projects.tsx          # 4. Proyectos (repositorio, descarga, demo)
+  Testimonials.tsx      # 5. Testimonios (3)
+  Experience.tsx        # 6. Experiencia académica 🎓 y laboral 💼
+  Skills.tsx            # ⭐ Habilidades e idiomas
+  TerminalPlayground.tsx# ⭐ Terminal interactiva
+  Contact.tsx           # 7. Contacto (última sección) + formulario
+  Footer.tsx            # 8. © año automático
+  Terminal.tsx, ContactForm.tsx   # compartidos por la vista clásica y el taller
+  workshop/
+    WorkshopOverlay.tsx # capa del taller: estado, enlaces #, tema, teclado
+    WorkshopCanvas.tsx  # <Canvas> + escena (cargado con dynamic, ssr: false)
+    CameraRig.tsx       # cámara isométrica, foco por sección, parallax, arrastre
+    DayCycle.tsx        # luces y transición noche ↔ día
+    Interactive.tsx, Tags.tsx
+    scene/              # cuarto, ventana, escritorio, monitor, ingeniero, rack…
+    ui/                 # TopBar, SectionDock, SectionPanel, StatusToast
+    panels/             # contenido de cada sección del taller
+lib/
+  theme.ts              # tema compartido (evento themechange)
+  terminal-commands.ts  # comandos de la terminal
+  workshop/             # secciones, store, acciones, texturas, estado por fotograma
+data/portfolio.ts       # TODO el contenido (perfil, proyectos, testimonios…)
+public/                 # cv.pdf, fotos, portadas, video y taller-preview.jpg
+docs/demo-taller.html   # prototipo de referencia
 ```
 
-## Extras innovadores
+## Editar el contenido
 
-- Pantalla de arranque estilo terminal
-- Paleta de comandos con **Ctrl / ⌘ + K**
-- Tema claro/oscuro con transición circular (View Transitions API)
-- Red de partículas interactiva en el Hero y efecto máquina de escribir
-- Tarjetas de proyecto con inclinación 3D y foco de luz
-- Terminal interactiva (`help`, `projects`, `skills`, `goto`, `matrix`…)
-- Código Konami (↑↑↓↓←→←→BA) → lluvia Matrix
-- Barra de progreso de scroll, halo del cursor, contadores animados
-- Clic derecho en un contacto para copiarlo
+Todo sale de `data/portfolio.ts`: los paneles del taller y la vista clásica usan los
+mismos datos. Para agregar el APK de CambiaYA, cambia la etiqueta de `soon` por un
+enlace en `links` con `kind: "download"`.
 
 ## Formulario de contacto
 
-Por defecto simula el envío. Para recibir correos reales crea un formulario en
-[Formspree](https://formspree.io) y define la variable de entorno
-`NEXT_PUBLIC_FORMSPREE_ID` en Vercel.
+Con la variable de entorno `NEXT_PUBLIC_FORMSPREE_ID` (en Vercel) el formulario envía
+por [Formspree](https://formspree.io) y muestra el resultado real. Sin ella, abre la
+aplicación de correo del visitante con el mensaje ya escrito.
+
+## Extras
+
+- Paleta de comandos con **Ctrl / ⌘ + K** (incluye entrar al taller o a la vista clásica)
+- Código Konami (↑↑↓↓←→←→BA) → lluvia Matrix
+- Fondo de constelación, barra de progreso teal → ámbar, efectos al pasar el mouse
+- Terminal: `help`, `whoami`, `proyectos`, `stack`, `contacto`, `ir <sección>`, `tema`…
