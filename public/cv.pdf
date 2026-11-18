@@ -1,0 +1,56 @@
+%PDF-1.4
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [3 0 R] /Count 1 >>
+endobj
+3 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 4 0 R /F2 5 0 R >> >> /Contents 6 0 R >>
+endobj
+4 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
+endobj
+5 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold >>
+endobj
+6 0 obj
+<< /Length 1218 >>
+stream
+BT
+/F2 26 Tf 1 0 0 1 60 780 Tm (Lorem Ipsum Dolor Sit) Tj
+/F1 14 Tf 1 0 0 1 60 744 Tm (Lorem Developer) Tj
+/F1 11 Tf 1 0 0 1 60 720 Tm (lorem@ipsum.com  |  +57 300 000 0000  |  Lorem, Ipsum) Tj
+/F1 11 Tf 1 0 0 1 60 699 Tm () Tj
+/F2 14 Tf 1 0 0 1 60 678 Tm (Perfil) Tj
+/F1 11 Tf 1 0 0 1 60 654 Tm (Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod) Tj
+/F1 11 Tf 1 0 0 1 60 633 Tm (tempor incididunt ut labore et dolore magna aliqua.) Tj
+/F1 11 Tf 1 0 0 1 60 612 Tm () Tj
+/F2 14 Tf 1 0 0 1 60 591 Tm (Experiencia) Tj
+/F1 11 Tf 1 0 0 1 60 567 Tm (2025 - Actualidad  Lorem Developer Jr. - Ipsum Tech S.A.S.) Tj
+/F1 11 Tf 1 0 0 1 60 546 Tm (2024               Freelance Dolor - Sit Amet Studio) Tj
+/F1 11 Tf 1 0 0 1 60 525 Tm () Tj
+/F2 14 Tf 1 0 0 1 60 504 Tm (Educacion) Tj
+/F1 11 Tf 1 0 0 1 60 480 Tm (2023 - Actualidad  Lorem Ipsum Engineering - Universidad Lorem Ipsum) Tj
+/F1 11 Tf 1 0 0 1 60 459 Tm (2022               Curso de Dolor Sit - Instituto Amet Consectetur) Tj
+/F1 11 Tf 1 0 0 1 60 438 Tm () Tj
+/F2 14 Tf 1 0 0 1 60 417 Tm (Habilidades) Tj
+/F1 11 Tf 1 0 0 1 60 393 Tm (Next.js, React, TypeScript, Tailwind CSS, Node.js, Python, Git, Vercel) Tj
+ET
+0 0.8 0.3 RG 3 w 60 742 m 535 742 l S
+endstream
+endobj
+xref
+0 7
+0000000000 65535 f 
+0000000009 00000 n 
+0000000058 00000 n 
+0000000115 00000 n 
+0000000251 00000 n 
+0000000321 00000 n 
+0000000396 00000 n 
+trailer
+<< /Size 7 /Root 1 0 R >>
+startxref
+1665
+%%EOF
