@@ -22,7 +22,7 @@ const caveat = Caveat({
 
 const TITLE = "David Alejandro Cabezas Perez · Ingeniero de software";
 const DESCRIPTION =
-  "Portafolio de David Alejandro Cabezas Perez, estudiante de Ingeniería de Software en Pasto, Colombia. Backend, arquitectura e IA aplicada: SafeCity AI, CambiaYA, Estudy-AI, Plomo y Paja y ExplorIA.";
+  "Portafolio de David Alejandro Cabezas Perez, estudiante de Ingeniería de Software en Pasto, Colombia. Backend, arquitectura e IA aplicada: SafeCity AI, SmartSwap, Estudy-AI, Plomo y Paja y ExplorIA.";
 
 export const metadata: Metadata = {
   title: TITLE,

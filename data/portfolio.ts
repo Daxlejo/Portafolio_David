@@ -79,7 +79,7 @@ export const NAV_LINKS: NavLink[] = [
 export const ABOUT = {
   paragraphs: [
     "Soy estudiante de quinto semestre de Ingeniería de Software en la Universidad Cooperativa de Colombia, en Pasto. Me enfoco en el backend y la arquitectura: modelar bien el dominio, separar responsabilidades y dejar sistemas que otros puedan entender, mantener y escalar.",
-    "He construido en equipo SafeCity AI (Java + Spring Boot con IA), CambiaYA (app Android con NestJS e IA), un videojuego en Unity con IA y ExplorIA, una guía turística para smartwatch. También desarrollo soluciones pequeñas para negocios reales, como la app de precios de domicilios de un restaurante.",
+    "He construido en equipo SafeCity AI (Java + Spring Boot con IA), SmartSwap (app Android con NestJS e IA), un videojuego en Unity con IA y ExplorIA, una guía turística para smartwatch. También desarrollo soluciones pequeñas para negocios reales, como la app de precios de domicilios de un restaurante.",
   ],
   facts: [
     { icon: "📍", label: "Pasto, Nariño, Colombia" },
@@ -130,11 +130,11 @@ export const PROJECTS: Project[] = [
     soon: [],
   },
   {
-    id: "cambiaya",
-    title: "CambiaYA",
-    cover: "/images/proyectos/cambiaya.jpg",
+    id: "smartswap",
+    title: "SmartSwap",
+    cover: "/images/proyectos/smartswap.jpg",
     kind: "Android · IA",
-    meta: "Antes SmartSwap AI · Diseño de Software · 5.º semestre",
+    meta: "Diseño de Software · 5.º semestre",
     text: "App Android de intercambio de objetos que encuentra anillos de trueque de 2 a 4 personas con un algoritmo de grafos e IA, para resolver el problema de que casi nunca dos personas quieren justo lo que la otra ofrece.",
     solutions: [
       "Detección de ciclos A→B→C→A con BFS sobre el grafo de artículos",
@@ -143,8 +143,11 @@ export const PROJECTS: Project[] = [
       "Accesible: textos de 14 px o más, áreas táctiles de 44–48 px, modo claro y oscuro",
     ],
     tech: ["React", "Vite", "Tailwind CSS", "Capacitor", "NestJS", "OpenAI API", "Render", "Playwright"],
-    links: [{ kind: "github", label: "Repositorio", href: "https://github.com/Daxlejo/SmartSwap-AI" }],
-    soon: ["APK · próximamente"],
+    links: [
+      { kind: "github", label: "Repositorio", href: "https://github.com/Daxlejo/SmartSwap-AI" },
+      { kind: "download", label: "Descargar v1.0.0", href: "https://github.com/Daxlejo/SmartSwap-AI/releases/tag/v1.0.0" },
+    ],
+    soon: [],
   },
   {
     id: "estudy",
@@ -256,7 +259,7 @@ export const EXPERIENCES: Experience[] = [
     place: "Proyectos en equipo y para clientes",
     text: "Desarrollo de software en equipo y para clientes.",
     points: [
-      "Proyectos de 2 meses en equipo: SafeCity AI, CambiaYA (app Android), ExplorIA (smartwatch) y Plomo y Paja (videojuego)",
+      "Proyectos de 2 meses en equipo: SafeCity AI, SmartSwap (app Android), ExplorIA (smartwatch) y Plomo y Paja (videojuego)",
       "Landing page para un proyecto de la Universidad de Nariño",
     ],
   },

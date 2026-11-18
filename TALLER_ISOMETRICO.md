@@ -132,7 +132,7 @@ Las imágenes y el video ya están en `public/`:
 | `public/images/perfil.jpg` (800×1000) | Foto del Hero (y miniatura en el panel "Sobre mí" del taller) |
 | `public/images/barberia.jpg` (1000×1000) | Tarjeta "Fuera del código: también soy barbero" en Sobre mí |
 | `public/videos/corte.mp4` (540×960, sin audio, 12 s) + `public/images/corte-poster.jpg` | Clip vertical sobre la foto de barbería |
-| `public/images/proyectos/{safecity-ai,estudy-ai,cambiaya,plomo-y-paja,exploria}.jpg` (1200×675) | Portadas de los proyectos |
+| `public/images/proyectos/{safecity-ai,estudy-ai,smartswap,plomo-y-paja,exploria}.jpg` (1200×675) | Portadas de los proyectos |
 | `public/images/proyectos/safecity-logo.svg` | Logo nuevo de SafeCity AI |
 | `public/images/testimonios/{yeison-cabezas,victor-armero}.jpg` (240×240) | Avatares de testimonios (David López va con iniciales) |
 
@@ -169,7 +169,7 @@ Las imágenes y el video ya están en `public/`:
 | Proyecto | Categoría · meta | Botones |
 |---|---|---|
 | SafeCity AI | Backend · IA · Proyecto en equipo, 4.º semestre, 2 meses | Repositorio `https://github.com/Daxlejo/SafeCity_AI` (solo eso) |
-| CambiaYA (antes SmartSwap AI) | Android · IA · Diseño de Software, 5.º semestre | Repositorio `https://github.com/Daxlejo/SmartSwap-AI` + "APK · próximamente" (se cambia por el enlace al release cuando exista) |
+| SmartSwap | Android · IA · Diseño de Software, 5.º semestre | Repositorio `https://github.com/Daxlejo/SmartSwap-AI` + "Descargar v1.0.0" (`https://github.com/Daxlejo/SmartSwap-AI/releases/tag/v1.0.0`) |
 | Estudy-AI | IA · Escritorio · v1.0.0 | Repositorio `https://github.com/Daxlejo/Estudy_AI` + **Descargar v1.0.0** `https://github.com/Daxlejo/Estudy_AI/releases/tag/v1.0.0` |
 | Plomo y Paja | Videojuego · IA · Equipo de 3, rol: programación | **Descargar y jugar** `https://github.com/EdedArt/Plomo_Y_Paja/releases/tag/v1.0` |
 | ExplorIA (guía turística con IA para smartwatch) | Wear OS · IA · Diseño de Software, 5.º semestre | Repositorio `https://github.com/Daxlejo/ExplorIA` + "Demo en Vercel · próximamente" |
@@ -196,7 +196,7 @@ Los enlaces de descarga van con el estilo sólido; los de repositorio, con borde
 
 **Experiencia laboral:**
 - 2026 – actualidad · Desarrollador de software, freelance:
-  - Proyectos de 2 meses en equipo: SafeCity AI, CambiaYA (app Android), ExplorIA (smartwatch) y Plomo y Paja (videojuego)
+  - Proyectos de 2 meses en equipo: SafeCity AI, SmartSwap (app Android), ExplorIA (smartwatch) y Plomo y Paja (videojuego)
   - Landing page para un proyecto de la Universidad de Nariño
 - Ene 2026 – jun 2026 · Asesor de call center · Panga BBQ, Pasto · Atención telefónica de pedidos y domicilios. Creó una app de escritorio para consultar el precio del domicilio por barrio, con panel de administrador, que reemplazó la búsqueda manual en un libro.
 - Feb 2023 – nov 2023 · Técnico en impresoras y computadores · Digital Akio S.A.S. · Soluciones de hardware (diagnóstico, mantenimiento y reparación)
@@ -415,7 +415,7 @@ Agrega `--color-warm: var(--warm)` en `@theme inline`. Revisa que el ParticleFie
 - [ ] Contacto movido al final (después de Habilidades y Terminal) en `page.tsx` y en `NAV_LINKS`.
 - [ ] Contenido real de la sección 3.1 en `data/portfolio.ts`; fotos, video y portadas desde `public/`.
 - [ ] Sin notas internas visibles en el sitio (nada de "demo", "borrador", "en el sitio real…"). El formulario usa Formspree y muestra un mensaje de éxito o error real.
-- [ ] Botón GitHub en cada proyecto y etiqueta "sin demo" cuando no hay demo; año automático en el footer.
+- [ ] Botón GitHub en cada proyecto; año automático en el footer.
 - [ ] Checklist de la sección 10 cumplido (salvo GitHub/Vercel, que hace el dueño).
 
 **Fase 2: taller estático**

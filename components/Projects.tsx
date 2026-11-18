@@ -3,7 +3,7 @@ import { PROJECTS, type Project } from "@/data/portfolio";
 import { DownloadIcon, ExternalIcon, GithubIcon } from "./Icons";
 import Reveal, { SectionTitle } from "./Reveal";
 
-/** Botones del proyecto: descargas en sólido, repositorios con borde e ícono de GitHub, "próximamente" deshabilitado. */
+/** Botones del proyecto: descargas en sólido, demos en acento, repositorios con borde e ícono de GitHub, "próximamente" deshabilitado. */
 export function ProjectLinks({ p }: { p: Project }) {
   const size = "h-9 text-[13px]";
   return (
@@ -13,7 +13,7 @@ export function ProjectLinks({ p }: { p: Project }) {
           key={l.href}
           href={l.href}
           target="_blank"
-          rel="noreferrer"
+          rel="noopener noreferrer"
           className={`btn ${size} ${l.kind === "download" ? "btn-solid" : l.kind === "demo" ? "btn-accent" : ""}`}
           aria-label={`${l.label}: ${p.title}`}
         >
@@ -26,11 +26,6 @@ export function ProjectLinks({ p }: { p: Project }) {
           {t}
         </span>
       ))}
-      {!p.links.some((l) => l.kind === "demo") && p.soon.length === 0 && (
-        <span className={`btn btn-off ${size}`} title="Este proyecto no tiene demo web">
-          sin demo
-        </span>
-      )}
     </div>
   );
 }

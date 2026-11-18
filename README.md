@@ -72,8 +72,8 @@ docs/demo-taller.html   # prototipo de referencia
 ## Editar el contenido
 
 Todo sale de `data/portfolio.ts`: los paneles del taller y la vista clásica usan los
-mismos datos. Para agregar el APK de CambiaYA, cambia la etiqueta de `soon` por un
-enlace en `links` con `kind: "download"`.
+mismos datos. Para agregar una descarga (como el release de SmartSwap), agrega un
+enlace en `links` con `kind: "download"`; las etiquetas de `soon` se muestran deshabilitadas.
 
 ## Formulario de contacto
 
