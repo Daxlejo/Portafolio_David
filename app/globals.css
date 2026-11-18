@@ -1,32 +1,40 @@
 @import "tailwindcss";
 
-/* ---------- Tema (oscuro por defecto, claro opcional) ---------- */
+/* ---------- Paleta global: noche por defecto, día = tema claro ---------- */
 :root {
-  --bg: #0a0f14;
-  --bg-2: #05090b;
-  --surface: #111a21;
-  --surface-2: #16222b;
-  --border: #1f2f3a;
-  --fg: #e8f1ec;
-  --muted: #8a9ba5;
-  --accent: #00ff41;
-  --accent-2: #1fa162;
-  --accent-soft: rgba(0, 255, 65, 0.12);
-  --glow: rgba(0, 255, 65, 0.35);
+  --bg: #0a111d;
+  --bg-2: #070c16;
+  --surface: #111a2a;
+  --surface-2: #16223a;
+  --border: #1f2c40;
+  --fg: #e8eef6;
+  --muted: #97a6ba;
+  --accent: #2dd4bf;
+  --accent-2: #0f766e;
+  --accent-soft: rgba(45, 212, 191, 0.12);
+  --glow: rgba(45, 212, 191, 0.3);
+  --warm: #f5b04c;
+  --accent-ink: #04201c;
+  --glass: rgba(12, 19, 32, 0.74);
+  --shadow: 0 18px 50px rgba(0, 0, 0, 0.45);
 }
 
 :root[data-theme="light"] {
-  --bg: #f4f7f5;
-  --bg-2: #e9efeb;
+  --bg: #d9e3ec;
+  --bg-2: #cdd9e4;
   --surface: #ffffff;
-  --surface-2: #f0f5f2;
-  --border: #d5e0d9;
-  --fg: #0d1a14;
-  --muted: #55665d;
-  --accent: #0f9d4a;
-  --accent-2: #178a52;
-  --accent-soft: rgba(15, 157, 74, 0.12);
-  --glow: rgba(15, 157, 74, 0.25);
+  --surface-2: #f1f5f9;
+  --border: #c9d5e1;
+  --fg: #0f1a2a;
+  --muted: #4c5d72;
+  --accent: #0f8f84;
+  --accent-2: #0f766e;
+  --accent-soft: rgba(15, 143, 132, 0.12);
+  --glow: rgba(15, 143, 132, 0.22);
+  --warm: #b45309;
+  --accent-ink: #ffffff;
+  --glass: rgba(255, 255, 255, 0.8);
+  --shadow: 0 18px 50px rgba(15, 23, 42, 0.18);
 }
 
 @theme inline {
@@ -40,23 +48,27 @@
   --color-accent: var(--accent);
   --color-accent-2: var(--accent-2);
   --color-accent-soft: var(--accent-soft);
+  --color-accent-ink: var(--accent-ink);
+  --color-warm: var(--warm);
+  --color-glass: var(--glass);
   --font-sans: var(--font-poppins);
   --font-mono: var(--font-jetbrains);
+  --font-hand: var(--font-caveat);
 }
 
 html {
-  scroll-padding-top: 80px;
+  scroll-padding-top: 72px;
 }
 
 body {
   background: var(--bg);
   color: var(--fg);
-  transition: background-color 0.4s ease, color 0.4s ease;
+  transition: background-color 0.6s ease, color 0.4s ease;
 }
 
 ::selection {
   background: var(--accent);
-  color: #000;
+  color: var(--accent-ink);
 }
 
 /* Scrollbar */
@@ -64,64 +76,233 @@ body {
 ::-webkit-scrollbar-track { background: var(--bg-2); }
 ::-webkit-scrollbar-thumb { background: var(--accent-2); border-radius: 10px; }
 
-/* ---------- Utilidades personalizadas ---------- */
-.grid-bg {
-  background-image:
-    linear-gradient(var(--border) 1px, transparent 1px),
-    linear-gradient(90deg, var(--border) 1px, transparent 1px);
-  background-size: 48px 48px;
-  mask-image: radial-gradient(ellipse at center, #000 30%, transparent 75%);
-}
-
-.text-gradient {
-  background: linear-gradient(90deg, var(--accent), var(--accent-2), var(--accent));
-  background-size: 200% auto;
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  animation: shine 4s linear infinite;
-}
-
-.glow { box-shadow: 0 0 24px var(--glow); }
-
+/* ---------- Utilidades ---------- */
+@layer components {
 .glass {
-  background: color-mix(in srgb, var(--surface) 70%, transparent);
+  background: var(--glass);
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
 }
 
+.card {
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  background: color-mix(in srgb, var(--surface) 72%, transparent);
+}
+
+.pill {
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 3px 10px;
+  font-size: 12px;
+  color: var(--muted);
+  transition: border-color 0.2s, color 0.2s, background 0.2s;
+}
+.pill:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 8%, transparent);
+}
+
+/* Botones */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  height: 40px;
+  padding: 0 14px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: var(--glass);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  font-size: 13.5px;
+  font-weight: 500;
+  color: var(--fg);
+  cursor: pointer;
+  transition: border-color 0.2s, transform 0.15s, color 0.2s, box-shadow 0.3s;
+}
+.btn:hover { border-color: var(--accent); }
+.btn:active { transform: scale(0.97); }
+.btn svg { width: 17px; height: 17px; flex: none; }
+.btn-icon { width: 40px; padding: 0; }
+.btn-lg { height: 48px; padding: 0 20px; font-size: 15px; border-radius: 12px; }
+.btn-solid { background: var(--fg); color: var(--bg); border-color: transparent; }
+.btn-off { opacity: 0.65; cursor: default; font-size: 12.5px; }
+.btn-off:hover { border-color: var(--border); }
+.btn-accent {
+  position: relative;
+  overflow: hidden;
+  background: var(--accent);
+  color: var(--accent-ink);
+  border-color: transparent;
+  box-shadow: 0 12px 30px -12px var(--glow);
+}
+.btn-accent::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(115deg, transparent 35%, rgba(255, 255, 255, 0.45) 50%, transparent 65%);
+  background-size: 260% 100%;
+  background-position: 160% 0;
+  transition: background-position 0.8s;
+}
+.btn-accent:hover { transform: translateY(-2px); box-shadow: 0 18px 40px -12px var(--glow); }
+.btn-accent:hover::after { background-position: -60% 0; }
+
+/* Encabezado de sección: kicker mono + línea teal */
+.kicker {
+  font-family: var(--font-jetbrains), ui-monospace, monospace;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--accent);
+}
+.kicker-line::after {
+  content: "";
+  display: inline-block;
+  width: 42px;
+  height: 1px;
+  background: var(--accent);
+  vertical-align: middle;
+  margin-left: 10px;
+  opacity: 0.6;
+}
+
+.text-gradient {
+  background: linear-gradient(90deg, var(--accent), color-mix(in srgb, var(--accent) 55%, #ffffff));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* ---------- Efectos al pasar el mouse (.fx) ---------- */
+.fx {
+  position: relative;
+  isolation: isolate;
+  transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1), border-color 0.3s, box-shadow 0.3s;
+}
+.fx::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(380px circle at var(--mx, 50%) var(--my, 50%), color-mix(in srgb, var(--accent) 16%, transparent), transparent 45%);
+  opacity: 0;
+  transition: opacity 0.35s;
+  pointer-events: none;
+  z-index: -1;
+}
+.fx:hover::before { opacity: 1; }
+.fx::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(115deg, transparent 38%, rgba(255, 255, 255, 0.09) 50%, transparent 62%);
+  background-size: 260% 100%;
+  background-position: 160% 0;
+  pointer-events: none;
+  transition: background-position 0.9s ease;
+  z-index: 3;
+}
+.fx:hover::after { background-position: -60% 0; }
+.fx:hover {
+  border-color: color-mix(in srgb, var(--accent) 65%, transparent);
+  box-shadow: 0 20px 44px -20px var(--glow), 0 0 0 1px color-mix(in srgb, var(--accent) 22%, transparent);
+  transform: translateY(-4px);
+}
+
+/* Ícono de tarjeta que se rellena y gira */
+.icard-ic { transition: background 0.3s, color 0.3s, transform 0.3s; }
+.fx:hover .icard-ic { background: var(--accent); color: var(--accent-ink); transform: rotate(-6deg) scale(1.08); }
+
+/* Portada de proyecto */
+.cover img { transition: transform 0.6s ease; }
+.fx:hover .cover img { transform: scale(1.04); }
+.cover::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 55%, rgba(5, 10, 20, 0.45));
+  opacity: 0;
+  transition: opacity 0.4s;
+  pointer-events: none;
+}
+.fx:hover .cover::after { opacity: 1; }
+
+/* Foto del Hero */
+.portrait::before {
+  content: "";
+  position: absolute;
+  inset: 18px -18px -18px 18px;
+  border: 1.5px solid color-mix(in srgb, var(--accent) 55%, transparent);
+  border-radius: 28px;
+  transition: transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.portrait:hover::before { transform: translate(6px, 6px); }
+.portrait .pframe img { transition: transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1); }
+.portrait:hover .pframe img { transform: scale(1.04); }
+
+/* Línea de tiempo */
+.tl { border-left: 2px solid var(--border); margin-left: 6px; padding-left: 18px; }
+.tl-item { position: relative; margin-bottom: 22px; transition: transform 0.25s; }
+.tl-item:last-child { margin-bottom: 0; }
+.tl-item::before {
+  content: "";
+  position: absolute;
+  left: -25px;
+  top: 6px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--bg);
+  border: 2px solid var(--accent);
+  transition: background 0.25s, box-shadow 0.25s;
+}
+.tl-item:hover { transform: translateX(4px); }
+.tl-item:hover::before { background: var(--accent); box-shadow: 0 0 0 5px color-mix(in srgb, var(--accent) 18%, transparent); }
+.tl-item:hover .tl-title { color: var(--accent); }
+
+/* Insignias flotantes */
+.badge-float {
+  position: absolute;
+  font-family: var(--font-jetbrains), ui-monospace, monospace;
+  font-size: 12px;
+  padding: 8px 11px;
+  border-radius: 10px;
+  background: var(--glass);
+  border: 1px solid var(--border);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  white-space: nowrap;
+  animation: floaty 6s ease-in-out infinite;
+  z-index: 2;
+}
+
+/* Punto que late */
+.ping-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); animation: ping-ring 1.8s infinite; }
+
 /* Revelado al hacer scroll */
 .reveal {
   opacity: 0;
-  transform: translateY(32px);
-  transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+  transform: translateY(18px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
 }
 .reveal.in { opacity: 1; transform: none; }
 
-/* Borde animado (conic) */
-.border-spin {
-  position: relative;
-  isolation: isolate;
+/* Halos de fondo de la vista clásica */
+.halos {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background:
+    radial-gradient(600px 400px at 85% 10%, color-mix(in srgb, var(--accent) 10%, transparent), transparent 70%),
+    radial-gradient(500px 380px at 5% 70%, color-mix(in srgb, var(--warm) 7%, transparent), transparent 70%);
 }
-.border-spin::before {
-  content: "";
-  position: absolute;
-  inset: -2px;
-  border-radius: inherit;
-  background: conic-gradient(from var(--angle), transparent 60%, var(--accent), transparent 80%);
-  animation: spin-angle 4s linear infinite;
-  z-index: -1;
-}
-@property --angle {
-  syntax: "<angle>";
-  initial-value: 0deg;
-  inherits: false;
-}
-
-/* Marquesina */
-.marquee { mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent); }
-.marquee-track { animation: marquee 35s linear infinite; }
-.marquee:hover .marquee-track { animation-play-state: paused; }
 
 .caret::after {
   content: "▋";
@@ -130,14 +311,19 @@ body {
   animation: blink 1s steps(1) infinite;
 }
 
-@keyframes shine { to { background-position: 200% center; } }
-@keyframes spin-angle { to { --angle: 360deg; } }
-@keyframes marquee { to { transform: translateX(-50%); } }
+/* Barra de chips con scroll horizontal sin barra visible */
+.no-scrollbar { scrollbar-width: none; }
+.no-scrollbar::-webkit-scrollbar { display: none; }
+
+}
+
 @keyframes blink { 50% { opacity: 0; } }
-@keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-14px); } }
+@keyframes floaty { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+@keyframes ping-ring {
+  0% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--accent) 60%, transparent); }
+  100% { box-shadow: 0 0 0 10px transparent; }
+}
 @keyframes pop-in { from { opacity: 0; transform: scale(0.9) translateY(10px); } to { opacity: 1; transform: none; } }
-@keyframes scan { from { transform: translateY(-100%); } to { transform: translateY(100vh); } }
-@keyframes grow-x { from { width: 0; } to { width: 100%; } }
 
 /* Transición circular al cambiar de tema */
 ::view-transition-old(root),
@@ -146,10 +332,10 @@ body {
   mix-blend-mode: normal;
 }
 
-.animate-float { animation: float 6s ease-in-out infinite; }
 .animate-pop { animation: pop-in 0.35s cubic-bezier(0.2, 0.8, 0.2, 1) both; }
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition: none !important; }
   .reveal { opacity: 1; transform: none; }
+  .fx:hover, .tl-item:hover { transform: none; }
 }

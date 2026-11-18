@@ -10,32 +10,33 @@ import TerminalPlayground from "@/components/TerminalPlayground";
 import Footer from "@/components/Footer";
 import BootLoader from "@/components/BootLoader";
 import CommandPalette from "@/components/CommandPalette";
-import { CursorGlow, KonamiMatrix, ScrollProgress } from "@/components/Effects";
+import { ConstellationBg, CursorGlow, FxTracker, KonamiMatrix, ScrollProgress } from "@/components/Effects";
 
 export default function Home() {
   return (
     <>
-      {/* Extras innovadores */}
+      {/* Extras */}
       <BootLoader />
       <ScrollProgress />
+      <ConstellationBg />
       <CursorGlow />
+      <FxTracker />
       <CommandPalette />
       <KonamiMatrix />
 
       {/* Secciones en el orden requerido */}
-      <Navbar />
+      <Navbar />                     {/* 1. Menú */}
       <main className="relative z-10">
-        <Hero />
-        <About />
-        <Projects />
-        <Testimonials />
-        <Experience />
-        <Contact />
-        {/* Secciones adicionales (antes del pie de página) */}
-        <Skills />
-        <TerminalPlayground />
+        <Hero />                     {/* 2. Hero + CV */}
+        <About />                    {/* 3. Acerca de mí */}
+        <Projects />                 {/* 4. Proyectos */}
+        <Testimonials />             {/* 5. Testimonios */}
+        <Experience />               {/* 6. Experiencia académica y laboral */}
+        <Skills />                   {/* ⭐ Adicional */}
+        <TerminalPlayground />       {/* ⭐ Adicional */}
+        <Contact />                  {/* 7. Contactos: siempre la última sección antes del footer */}
       </main>
-      <Footer />
+      <Footer />                     {/* 8. Pie de página */}
     </>
   );
 }

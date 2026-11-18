@@ -2,20 +2,18 @@
 
 import { useEffect, useState } from "react";
 import { NAV_LINKS, PROFILE } from "@/data/portfolio";
-import { getTheme, toggleTheme, type Theme } from "@/lib/theme";
+import { toggleTheme, useTheme } from "@/lib/theme";
+import { openWorkshop, useWorkshop } from "@/lib/workshop/store";
+import { CubeIcon, MenuIcon, MoonIcon, SunIcon, CloseIcon } from "./Icons";
 
 export default function Navbar() {
   const [active, setActive] = useState("inicio");
   const [open, setOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
-  const [theme, setTheme] = useState<Theme>("dark");
+  const theme = useTheme();
+  const canOpenWorkshop = useWorkshop((s) => s.available);
 
   useEffect(() => {
-    // eslint-disable-next-line react-hooks/set-state-in-effect
-    setTheme(getTheme());
-    const onTheme = (e: Event) => setTheme((e as CustomEvent<Theme>).detail);
     const onScroll = () => {
-      setScrolled(window.scrollY > 20);
       let cur = "inicio";
       for (const l of NAV_LINKS) {
         const el = document.getElementById(l.id);
@@ -25,109 +23,91 @@ export default function Navbar() {
     };
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
-    window.addEventListener("themechange", onTheme);
-    return () => {
-      window.removeEventListener("scroll", onScroll);
-      window.removeEventListener("themechange", onTheme);
-    };
+    return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
   return (
-    <header
-      className={`sticky top-0 z-50 transition-all duration-300 ${
-        scrolled ? "glass border-b border-line shadow-lg" : "bg-transparent"
-      }`}
-    >
-      <nav className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
-        <a href="#inicio" className="group flex items-center gap-2 font-mono text-lg font-bold">
-          <span className="grid h-9 w-9 place-items-center rounded-lg border border-accent/50 bg-accent-soft text-accent transition group-hover:rotate-12">
+    <header className="glass sticky top-0 z-50 border-b border-line">
+      <nav className="relative mx-auto flex h-[62px] max-w-[1180px] items-center gap-4 px-4 sm:px-6" aria-label="Secciones">
+        <a href="#inicio" className="flex items-center gap-3" aria-label={`${PROFILE.fullName}, ir al inicio`}>
+          <span className="grid h-[38px] w-[38px] place-items-center rounded-[10px] bg-accent font-mono text-[13px] font-semibold text-accent-ink">
             {PROFILE.initials}
           </span>
-          <span className="hidden sm:inline">
-            lorem<span className="text-accent">.dev</span>
-          </span>
+          <span className="text-[15px] font-semibold">{PROFILE.shortName}</span>
         </a>
 
         {/* Enlaces escritorio */}
-        <ul className="hidden items-center gap-1 xl:flex">
+        <ul className="ml-auto hidden items-center gap-0.5 xl:flex">
           {NAV_LINKS.map((l) => (
             <li key={l.id}>
               <a
                 href={`#${l.id}`}
-                className={`relative rounded-md px-3 py-2 text-sm transition hover:text-accent ${
-                  active === l.id ? "text-accent" : "text-muted"
+                aria-current={active === l.id ? "true" : undefined}
+                className={`rounded-lg px-2.5 py-[7px] text-[13.5px] transition-colors ${
+                  active === l.id ? "bg-accent-soft text-accent" : "text-muted hover:text-fg"
                 }`}
               >
                 {l.label}
-                <span
-                  className={`absolute inset-x-3 -bottom-0.5 h-0.5 rounded-full bg-accent transition-transform duration-300 ${
-                    active === l.id ? "scale-x-100" : "scale-x-0"
-                  }`}
-                />
               </a>
             </li>
           ))}
         </ul>
 
-        <div className="flex items-center gap-2">
+        <div className="ml-auto flex items-center gap-2 xl:ml-0">
           <button
             onClick={() => window.dispatchEvent(new Event("open-palette"))}
-            className="hidden items-center gap-2 rounded-lg border border-line px-3 py-1.5 font-mono text-xs text-muted transition hover:border-accent hover:text-accent md:flex"
+            className="btn hidden font-mono text-xs text-muted md:inline-flex"
             aria-label="Abrir paleta de comandos"
           >
-            ⌘ <kbd>Ctrl K</kbd>
+            <kbd>Ctrl K</kbd>
           </button>
           <button
             onClick={(e) => toggleTheme({ x: e.clientX, y: e.clientY })}
-            className="grid h-9 w-9 place-items-center rounded-lg border border-line text-lg transition hover:border-accent hover:rotate-45"
-            aria-label="Cambiar tema"
+            className="btn btn-icon"
+            aria-label={theme === "dark" ? "Cambiar a modo día" : "Cambiar a modo noche"}
+            title="Día / noche"
           >
-            {theme === "dark" ? "🌙" : "☀️"}
+            {theme === "dark" ? <SunIcon /> : <MoonIcon />}
           </button>
-          <a
-            href="/cv.pdf"
-            download
-            className="hidden rounded-lg bg-accent px-4 py-2 text-sm font-semibold text-black transition hover:scale-105 hover:shadow-[0_0_20px_var(--glow)] sm:inline-block"
-          >
-            CV ⬇
-          </a>
+          {canOpenWorkshop && (
+            <button onClick={openWorkshop} className="btn" title="Volver al taller 3D">
+              <CubeIcon />
+              <span className="hidden sm:inline">Taller 3D</span>
+            </button>
+          )}
           <button
             onClick={() => setOpen((o) => !o)}
-            className="grid h-9 w-9 place-items-center rounded-lg border border-line xl:hidden"
-            aria-label="Abrir menú"
+            className="btn btn-icon xl:hidden"
+            aria-label={open ? "Cerrar menú" : "Abrir menú"}
             aria-expanded={open}
+            aria-controls="menu-movil"
           >
-            <div className="space-y-1.5">
-              <span className={`block h-0.5 w-5 bg-fg transition ${open ? "translate-y-2 rotate-45" : ""}`} />
-              <span className={`block h-0.5 w-5 bg-fg transition ${open ? "opacity-0" : ""}`} />
-              <span className={`block h-0.5 w-5 bg-fg transition ${open ? "-translate-y-2 -rotate-45" : ""}`} />
-            </div>
+            {open ? <CloseIcon /> : <MenuIcon />}
           </button>
         </div>
       </nav>
 
       {/* Menú móvil */}
       <div
-        className={`glass overflow-hidden border-line transition-all duration-300 xl:hidden ${
-          open ? "max-h-[500px] border-b" : "max-h-0"
-        }`}
+        id="menu-movil"
+        className={`overflow-hidden border-line bg-bg transition-[max-height] duration-300 xl:hidden ${open ? "max-h-[520px] border-b" : "max-h-0"}`}
       >
-        <ul className="flex flex-col px-4 py-3">
-          {NAV_LINKS.map((l, i) => (
-            <li key={l.id} style={{ transitionDelay: `${i * 40}ms` }} className={`transition ${open ? "translate-x-0 opacity-100" : "-translate-x-4 opacity-0"}`}>
+        <ul className="flex flex-col px-4 pt-2 pb-4">
+          {NAV_LINKS.map((l) => (
+            <li key={l.id}>
               <a
                 href={`#${l.id}`}
                 onClick={() => setOpen(false)}
-                className={`block rounded-lg px-3 py-2.5 ${active === l.id ? "bg-accent-soft text-accent" : "text-fg"}`}
+                tabIndex={open ? 0 : -1}
+                className={`block rounded-lg px-3 py-2.5 text-[15px] ${active === l.id ? "bg-accent-soft text-accent" : "text-fg"}`}
               >
-                <span className="mr-2 font-mono text-xs text-accent">0{i + 1}.</span>
                 {l.label}
               </a>
             </li>
           ))}
           <li>
-            <a href="/cv.pdf" download className="mt-2 block rounded-lg bg-accent px-3 py-2.5 text-center font-semibold text-black">
-              Descargar CV ⬇
+            <a href={PROFILE.cv} download tabIndex={open ? 0 : -1} className="btn btn-accent mt-2 w-full">
+              Descargar CV
             </a>
           </li>
         </ul>

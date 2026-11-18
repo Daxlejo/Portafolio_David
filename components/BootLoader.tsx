@@ -3,12 +3,12 @@
 import { useEffect, useState } from "react";
 
 const LINES = [
-  "> Inicializando lorem_ipsum.sys ...",
-  "> Cargando módulos: [dolor] [sit] [amet]",
-  "> Compilando componentes Next.js + TypeScript",
-  "> Aplicando estilos Tailwind CSS",
-  "> Conectando con Vercel edge network",
-  "> Acceso concedido. ¡Bienvenido!",
+  "> iniciando taller…",
+  "> ✓ encendiendo lámpara",
+  "> ✓ conectando servidores",
+  "> ✓ abriendo editor",
+  "> ✓ cargando proyectos",
+  "> listo. ¡Bienvenido!",
 ];
 
 /** Pantalla de arranque estilo terminal (solo la primera visita de la sesión). */
@@ -64,12 +64,12 @@ export default function BootLoader() {
         hiding ? "pointer-events-none scale-110 opacity-0 blur-sm" : ""
       }`}
     >
-      <div className="w-full max-w-xl overflow-hidden rounded-xl border border-line bg-surface font-mono text-sm shadow-2xl glow">
+      <div className="w-full max-w-xl overflow-hidden rounded-xl border border-line bg-surface font-mono text-sm shadow-[var(--shadow)]">
         <div className="flex items-center gap-2 border-b border-line bg-surface-2 px-4 py-2.5">
-          <span className="h-3 w-3 rounded-full bg-red-500" />
-          <span className="h-3 w-3 rounded-full bg-yellow-400" />
-          <span className="h-3 w-3 rounded-full bg-green-500" />
-          <span className="ml-3 text-xs text-muted">startup — terminal</span>
+          <span className="h-3 w-3 rounded-full bg-[#f87171]" />
+          <span className="h-3 w-3 rounded-full bg-[#fbbf24]" />
+          <span className="h-3 w-3 rounded-full bg-[#34d399]" />
+          <span className="ml-3 text-xs text-muted">david@taller — arranque</span>
           <button onClick={skip} className="ml-auto text-xs text-muted hover:text-accent">
             saltar ⏭
           </button>

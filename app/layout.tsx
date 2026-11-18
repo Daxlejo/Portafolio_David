@@ -1,11 +1,11 @@
-import type { Metadata } from "next";
-import { Poppins, JetBrains_Mono } from "next/font/google";
+import type { Metadata, Viewport } from "next";
+import { Caveat, JetBrains_Mono, Poppins } from "next/font/google";
 import "./globals.css";
 
 const poppins = Poppins({
   variable: "--font-poppins",
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700", "800"],
+  weight: ["300", "400", "500", "600", "700"],
 });
 
 const jetbrains = JetBrains_Mono({
@@ -13,10 +13,42 @@ const jetbrains = JetBrains_Mono({
   subsets: ["latin"],
 });
 
+/** Letra a mano para la pizarra y el corcho del taller. */
+const caveat = Caveat({
+  variable: "--font-caveat",
+  subsets: ["latin"],
+  weight: ["600"],
+});
+
+const TITLE = "David Alejandro Cabezas Perez · Ingeniero de software";
+const DESCRIPTION =
+  "Portafolio de David Alejandro Cabezas Perez, estudiante de Ingeniería de Software en Pasto, Colombia. Backend, arquitectura e IA aplicada: SafeCity AI, CambiaYA, Estudy-AI, Plomo y Paja y ExplorIA.";
+
 export const metadata: Metadata = {
-  title: "David Alejandro Cabezas Perez · Desarrollador de Software",
-  description:
-    "Portafolio de David Alejandro Cabezas Perez. Soluciones de software en entornos mobile, web y de escritorio con Clean Architecture y buenas prácticas.",
+  title: TITLE,
+  description: DESCRIPTION,
+  authors: [{ name: "David Alejandro Cabezas Perez", url: "https://github.com/Daxlejo" }],
+  openGraph: {
+    type: "website",
+    locale: "es_CO",
+    title: TITLE,
+    description: DESCRIPTION,
+    siteName: "El taller de David",
+    images: [{ url: "/images/perfil.jpg", width: 800, height: 1000, alt: "Foto de David Alejandro Cabezas Perez" }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: TITLE,
+    description: DESCRIPTION,
+    images: ["/images/perfil.jpg"],
+  },
+};
+
+export const viewport: Viewport = {
+  themeColor: [
+    { media: "(prefers-color-scheme: dark)", color: "#0a111d" },
+    { media: "(prefers-color-scheme: light)", color: "#d9e3ec" },
+  ],
 };
 
 // Aplica el tema guardado antes de pintar (evita parpadeo)
@@ -27,7 +59,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     <html
       lang="es"
       suppressHydrationWarning
-      className={`${poppins.variable} ${jetbrains.variable} scroll-smooth antialiased`}
+      className={`${poppins.variable} ${jetbrains.variable} ${caveat.variable} scroll-smooth antialiased`}
     >
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />

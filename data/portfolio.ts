@@ -1,25 +1,32 @@
 /* =========================================================
-   Datos tipados del portafolio
+   Datos tipados del portafolio (fuente única para la vista
+   clásica y para los paneles del taller 3D)
    ========================================================= */
 
 export type NavLink = { id: string; label: string };
 
+export type ProjectLink = { kind: "github" | "download" | "demo"; label: string; href: string };
+
 export type Project = {
+  id: string;
   title: string;
-  description: string;
-  emoji: string;
-  gradient: string;
-  category: "Web" | "Móvil" | "IA" | "Escritorio";
+  cover: string;
+  kind: string;
+  meta: string;
+  featured?: boolean;
+  text: string;
   solutions: string[];
   tech: string[];
-  github: string;
-  demo: string;
+  links: ProjectLink[];
+  /** Etiquetas deshabilitadas ("próximamente") */
+  soon: string[];
 };
 
 export type Testimonial = {
   name: string;
   role: string;
-  avatar: string;
+  /** Ruta de la foto; si es null se muestran las iniciales */
+  photo: string | null;
   text: string;
   rating: number;
 };
@@ -29,106 +36,190 @@ export type Experience = {
   period: string;
   title: string;
   place: string;
-  points: string[];
-  tags: string[];
+  text: string;
+  points?: string[];
 };
 
-export type Skill = { name: string; group: string; icon: string };
+export type SkillGroup = { group: string; items: string[] };
+
+export type AboutIcon = "server" | "layout" | "spark" | "lang";
 
 export const PROFILE = {
   initials: "DC",
   firstName: "David Alejandro",
   lastName: "Cabezas Perez",
   fullName: "David Alejandro Cabezas Perez",
+  shortName: "David Cabezas",
+  role: "Estudiante de Ingeniería de Software · 5.º semestre",
+  university: "Universidad Cooperativa de Colombia",
   tagline:
     "Desarrollador de software enfocado en la construcción de soluciones integrales en entornos web, mobile y de escritorio. Apasionado por la Clean Architecture, las buenas prácticas y el desarrollo de sistemas robustos, escalables y verdaderamente efectivos.",
-  email: "david.cabezas@correo.com",
-  emailAlt: "david.dev@lorem.com",
-  phone: "+57 300 000 0000",
+  email: "davo03011@gmail.com",
   location: "Pasto, Nariño, Colombia",
-  github: "https://github.com/",
-  linkedin: "https://www.linkedin.com/",
-  instagram: "https://www.instagram.com/",
-  whatsapp: "https://wa.me/573000000000",
+  github: "https://github.com/Daxlejo",
+  githubUser: "Daxlejo",
+  linkedin: "https://www.linkedin.com/in/david-cabezas-5b087944a/",
+  linkedinLabel: "David Cabezas",
+  photo: "/images/perfil.jpg",
+  cv: "/cv.pdf",
 };
 
+/** Orden del profesor; Contacto siempre es la última sección. */
 export const NAV_LINKS: NavLink[] = [
   { id: "inicio", label: "Inicio" },
   { id: "sobre-mi", label: "Sobre mí" },
   { id: "proyectos", label: "Proyectos" },
   { id: "testimonios", label: "Testimonios" },
   { id: "experiencia", label: "Experiencia" },
-  { id: "contacto", label: "Contacto" },
   { id: "habilidades", label: "Habilidades" },
   { id: "playground", label: "Terminal" },
+  { id: "contacto", label: "Contacto" },
 ];
 
 export const ABOUT = {
   paragraphs: [
-    "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Me enfoco en desarrollar software con bases sólidas, código mantenible y arquitectura limpia.",
-    "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Apasionado por resolver problemas técnicos complejos y generar soluciones prácticas que aporten valor real.",
+    "Soy estudiante de quinto semestre de Ingeniería de Software en la Universidad Cooperativa de Colombia, en Pasto. Me enfoco en el backend y la arquitectura: modelar bien el dominio, separar responsabilidades y dejar sistemas que otros puedan entender, mantener y escalar.",
+    "He construido en equipo SafeCity AI (Java + Spring Boot con IA), CambiaYA (app Android con NestJS e IA), un videojuego en Unity con IA y ExplorIA, una guía turística para smartwatch. También desarrollo soluciones pequeñas para negocios reales, como la app de precios de domicilios de un restaurante.",
   ],
   facts: [
     { icon: "📍", label: "Pasto, Nariño, Colombia" },
-    { icon: "🎓", label: "Ingeniería de Software" },
-    { icon: "☕", label: "Café & Clean Code" },
-    { icon: "💻", label: "Web · Mobile · Desktop" },
+    { icon: "🎓", label: "Ing. de Software · 5.º semestre" },
+    { icon: "🏛️", label: "Universidad Cooperativa de Colombia" },
+    { icon: "🌐", label: "Español nativo · Inglés B1–B2" },
   ],
-  interests: ["Clean Architecture", "Buenas Prácticas", "Mobile Dev", "Web Dev", "Sistemas de Escritorio", "Soluciones Efectivas", "UI/UX"],
+  cards: [
+    { icon: "server", title: "Backend y arquitectura", text: "Java + Spring Boot, NestJS, Django REST, APIs REST y Clean Architecture." },
+    { icon: "layout", title: "Web, móvil y escritorio", text: "React, Next.js, Capacitor (Android), Wear OS y apps locales." },
+    { icon: "spark", title: "Inteligencia artificial", text: "Gemini, OpenAI API y Claude, integrados para resolver algo real." },
+    { icon: "lang", title: "Idiomas", text: "Español: nativo. Inglés: B1–B2 certificado (Centro de Idiomas, Universidad de Nariño)." },
+  ] satisfies { icon: AboutIcon; title: string; text: string }[],
+  interests: ["Clean Architecture", "Buenas prácticas", "Backend", "IA aplicada", "Apps de escritorio", "Videojuegos"],
   stats: [
-    { value: 10, suffix: "+", label: "Soluciones creadas" },
-    { value: 3, suffix: "", label: "Años creando código" },
-    { value: 12, suffix: "+", label: "Tecnologías dominadas" },
+    { value: 8, suffix: "+", label: "Proyectos de software" },
+    { value: 2, suffix: "", label: "Años programando" },
+    { value: 15, suffix: "+", label: "Tecnologías usadas" },
     { value: 999, suffix: "", label: "Tazas de café" },
   ],
+  barber: {
+    photo: "/images/barberia.jpg",
+    video: "/videos/corte.mp4",
+    poster: "/images/corte-poster.jpg",
+    title: "También soy barbero",
+    award: "Primer puesto",
+    text: "Gané el primer puesto en «Mi primera Batalla de Barbería» de Don Juan Academia. La barbería me enseñó precisión, paciencia y a trabajar pensando en el cliente: lo mismo que busco en cada línea de código.",
+  },
 };
 
 export const PROJECTS: Project[] = [
   {
-    title: "Estudy-AI",
-    description:
-      "Plataforma inteligente impulsada por IA diseñada para optimizar los métodos de estudio, generación adaptativa de resúmenes estructurados y asistencia académica contextualizada.",
-    emoji: "🧠",
-    gradient: "from-emerald-500/30 to-cyan-500/20",
-    category: "IA",
+    id: "safecity",
+    featured: true,
+    title: "SafeCity AI",
+    cover: "/images/proyectos/safecity-ai.jpg",
+    kind: "Backend · IA",
+    meta: "Proyecto en equipo · 4.º semestre · 2 meses",
+    text: "Sistema de reportes ciudadanos en tiempo real que usa IA para clasificar incidentes. Backend monolítico en Java con Spring Boot y arquitectura en capas (controladores, DTOs, servicios, repositorios y seguridad).",
     solutions: [
-      "Generación inteligente de resúmenes contextuales y tarjetas de estudio interactivas",
-      "Asistente conversacional adaptativo con procesamiento de documentos académicos",
-      "Diseño fundamentado en Clean Architecture, alta escalabilidad y experiencia fluida",
+      "Clasificación automática de reportes y fotos con la API de OpenAI",
+      "Módulo OSINT que recolecta y analiza noticias de incidentes",
+      "Geocodificación, zonas peligrosas y mapas de calor",
+      "Reportes en vivo con WebSockets, autenticación JWT y auditoría de administradores",
+    ],
+    tech: ["Java", "Spring Boot", "Spring Security + JWT", "WebSockets", "OpenAI API", "H2", "Docker", "JUnit + Mockito", "Swagger"],
+    links: [{ kind: "github", label: "Repositorio", href: "https://github.com/Daxlejo/SafeCity_AI" }],
+    soon: [],
+  },
+  {
+    id: "cambiaya",
+    title: "CambiaYA",
+    cover: "/images/proyectos/cambiaya.jpg",
+    kind: "Android · IA",
+    meta: "Antes SmartSwap AI · Diseño de Software · 5.º semestre",
+    text: "App Android de intercambio de objetos que encuentra anillos de trueque de 2 a 4 personas con un algoritmo de grafos e IA, para resolver el problema de que casi nunca dos personas quieren justo lo que la otra ofrece.",
+    solutions: [
+      "Detección de ciclos A→B→C→A con BFS sobre el grafo de artículos",
+      "Precio estimado en COP por IA, con validación de la respuesta y límites por categoría",
+      "214 pruebas de API, 248 de mobile y 40 end-to-end en verde",
+      "Accesible: textos de 14 px o más, áreas táctiles de 44–48 px, modo claro y oscuro",
+    ],
+    tech: ["React", "Vite", "Tailwind CSS", "Capacitor", "NestJS", "OpenAI API", "Render", "Playwright"],
+    links: [{ kind: "github", label: "Repositorio", href: "https://github.com/Daxlejo/SmartSwap-AI" }],
+    soon: ["APK · próximamente"],
+  },
+  {
+    id: "estudy",
+    title: "Estudy-AI",
+    cover: "/images/proyectos/estudy-ai.jpg",
+    kind: "IA · Escritorio",
+    meta: "Aplicación de escritorio · v1.0.0",
+    text: "Plataforma impulsada por IA para estudiar mejor: genera resúmenes estructurados, tarjetas de estudio y rutas de estudio a partir de tus documentos.",
+    solutions: [
+      "Resúmenes contextuales y tarjetas de estudio interactivas",
+      "Asistente conversacional sobre documentos académicos",
+      "Diseño con Clean Architecture",
     ],
     tech: ["Next.js", "TypeScript", "Tailwind CSS", "OpenAI / Gemini API", "Clean Architecture"],
-    github: "https://github.com/",
-    demo: "https://vercel.com/",
+    links: [
+      { kind: "github", label: "Repositorio", href: "https://github.com/Daxlejo/Estudy_AI" },
+      { kind: "download", label: "Descargar v1.0.0", href: "https://github.com/Daxlejo/Estudy_AI/releases/tag/v1.0.0" },
+    ],
+    soon: [],
+  },
+  {
+    id: "plomo",
+    title: "Plomo y Paja",
+    cover: "/images/proyectos/plomo-y-paja.jpg",
+    kind: "Videojuego · IA",
+    meta: "Equipo de 3 · Mi rol: programación · 2026",
+    text: "FPS narrativo en Unity que reinterpreta Los Tres Cerditos como una historia de mafia. Una IA conectada a la API de OpenAI es la voz interior del protagonista y reacciona a lo que haces: pistas, interrogatorios y tres finales.",
+    solutions: [
+      "Manos en primera persona dibujadas a mano y animadas por código",
+      "IA como voz interior, con respaldo si falla la conexión",
+      "Interrogatorios con árbol de diálogo y lip-sync",
+      "Niveles generados por código desde menús de editor",
+    ],
+    tech: ["Unity 2022.3", "C#", "URP", "NavMesh", "OpenAI API", "Python"],
+    links: [{ kind: "download", label: "Descargar y jugar", href: "https://github.com/EdedArt/Plomo_Y_Paja/releases/tag/v1.0" }],
+    soon: [],
+  },
+  {
+    id: "exploria",
+    title: "ExplorIA",
+    cover: "/images/proyectos/exploria.jpg",
+    kind: "Wear OS · IA",
+    meta: "Guía turística con IA para smartwatch · Diseño de Software · 5.º semestre",
+    text: "Guía turística con IA en tu muñeca: según tu ubicación, el reloj te cuenta un dato breve (histórico, curioso o cómico) del lugar emblemático más cercano. Funciona en cualquier ciudad, sin base de datos fija.",
+    solutions: [
+      "Datos solo de lugares emblemáticos, 1 o 2 por hora para no saturar",
+      "Tipo de dato e intensidad configurables, con historial",
+      "Arquitectura por capas y uso eficiente de la IA",
+    ],
+    tech: ["Wear OS", "OpenAI API", "Geolocalización", "Arquitectura por capas"],
+    links: [{ kind: "github", label: "Repositorio", href: "https://github.com/Daxlejo/ExplorIA" }],
+    soon: ["Demo en Vercel · próximamente"],
   },
 ];
 
 export const TESTIMONIALS: Testimonial[] = [
   {
-    name: "Lorem Ipsum",
-    role: "Profesor · Universidad",
-    avatar: "👨‍🏫",
-    text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Gran capacidad para estructurar proyectos con Clean Architecture y buenas prácticas de desarrollo.",
+    name: "Yeison Daniel Cabezas",
+    role: "Laboratorio IoT · hermano",
+    photo: "/images/testimonios/yeison-cabezas.jpg",
+    text: "En el laboratorio IoT David se encargó de todo el software: organizó el código, conectó los sensores con la aplicación y no paró hasta que todo funcionó y quedó documentado.",
     rating: 5,
   },
   {
-    name: "Dolor Sit",
-    role: "Compañera de equipo",
-    avatar: "👩‍🎓",
-    text: "Ut enim ad minim veniam, trabajar en equipo en soluciones web y mobile fue una experiencia excelente por su enfoque en código limpio.",
+    name: "Victor Armero",
+    role: "Jefe · Panga BBQ",
+    photo: "/images/testimonios/victor-armero.jpg",
+    text: "Teníamos los precios de los domicilios anotados en un libro y había que buscarlos a mano. David nos hizo una app para el computador: buscamos el barrio, sale el precio y nosotros mismos lo podemos cambiar.",
     rating: 5,
   },
   {
-    name: "Amet Consectetur",
-    role: "Cliente · Soluciones Tech",
-    avatar: "🧑‍💼",
-    text: "Duis aute irure dolor in reprehenderit. Entregó una solución de software altamente efectiva, rápida y con una interfaz muy bien cuidada.",
-    rating: 5,
-  },
-  {
-    name: "Adipiscing Elit",
-    role: "Líder técnico",
-    avatar: "👩‍💻",
-    text: "Excepteur sint occaecat cupidatat non proident. Destaca por su compromiso con los estándares de calidad y resolución efectiva de problemas.",
+    name: "David López",
+    role: "Estudiante · Universidad de Nariño",
+    photo: null,
+    text: "Necesitábamos una landing page para presentar nuestro proyecto en la universidad y David nos ayudó a construirla rápido, clara y lista para mostrar.",
     rating: 5,
   },
 ];
@@ -136,67 +227,73 @@ export const TESTIMONIALS: Testimonial[] = [
 export const EXPERIENCES: Experience[] = [
   {
     type: "academica",
-    period: "2023 – Actualidad",
+    period: "2024 – actualidad",
     title: "Ingeniería de Software",
-    place: "Universidad · Pasto, Colombia",
-    points: [
-      "Formación en ingeniería de software, arquitectura de sistemas y metodologías ágiles",
-      "Aplicación de Clean Architecture, patrones de diseño y estándares de calidad",
-    ],
-    tags: ["Clean Architecture", "Buenas Prácticas", "Full-Stack"],
+    place: "Universidad Cooperativa de Colombia · Pasto",
+    text: "Cursando 5.º semestre. Arquitectura de software, Clean Architecture, patrones de diseño, bases de datos y metodologías ágiles.",
   },
   {
     type: "academica",
-    period: "2022",
-    title: "Cursos y Certificaciones Especializadas",
-    place: "Plataformas de Desarrollo y Tecnología",
-    points: [
-      "Desarrollo de aplicaciones móviles y soluciones web escalables",
-      "Estructuras de datos avanzadas y diseño de APIs robustas",
-    ],
-    tags: ["Mobile", "Web", "APIs"],
+    period: "2022 – 2024",
+    title: "Inglés · 5 semestres",
+    place: "Centro de Idiomas, Universidad de Nariño (VIPRI)",
+    text: "Curso de idiomas desde grado 10 hasta mediados de 2024. Certificado de nivel B1–B2.",
+  },
+  {
+    type: "academica",
+    period: "2011 – 2023",
+    title: "Bachiller",
+    place: "Institución Educativa Municipal Libertad · Pasto, Nariño",
+    text: "Educación básica y media.",
   },
   {
     type: "laboral",
-    period: "2025 – Actualidad",
-    title: "Desarrollador de Software",
-    place: "Proyectos y Soluciones Digitales",
+    period: "2026 – actualidad",
+    title: "Desarrollador de software · Freelance",
+    place: "Proyectos en equipo y para clientes",
+    text: "Desarrollo de software en equipo y para clientes.",
     points: [
-      "Diseño y construcción de soluciones web, móviles y de escritorio orientadas a resultados",
-      "Implementación de arquitecturas limpias, modulares y de alto rendimiento",
+      "Proyectos de 2 meses en equipo: SafeCity AI, CambiaYA (app Android), ExplorIA (smartwatch) y Plomo y Paja (videojuego)",
+      "Landing page para un proyecto de la Universidad de Nariño",
     ],
-    tags: ["Next.js", "TypeScript", "Mobile", "Desktop"],
   },
   {
     type: "laboral",
-    period: "2024",
-    title: "Desarrollador Independiente",
-    place: "Soluciones de Software",
-    points: [
-      "Creación de aplicativos funcionales y efectivos para diversos requerimientos",
-      "Optimización de flujos de trabajo e interfaces intuitivas para usuarios finales",
-    ],
-    tags: ["React", "Tailwind", "Clean Code"],
+    period: "Ene 2026 – jun 2026",
+    title: "Asesor de call center",
+    place: "Panga BBQ · Pasto",
+    text: "Atención telefónica de pedidos y domicilios. Creé una app de escritorio para consultar el precio del domicilio por barrio, con panel de administrador, que reemplazó la búsqueda manual en un libro.",
+  },
+  {
+    type: "laboral",
+    period: "Feb 2023 – nov 2023",
+    title: "Técnico en impresoras y computadores",
+    place: "Digital Akio S.A.S.",
+    text: "Soluciones de hardware: diagnóstico, mantenimiento y reparación de impresoras y computadores.",
   },
 ];
 
-export const SKILLS: Skill[] = [
-  { name: "Next.js", group: "Frontend", icon: "▲" },
-  { name: "React", group: "Frontend", icon: "⚛️" },
-  { name: "TypeScript", group: "Frontend", icon: "🟦" },
-  { name: "Tailwind CSS", group: "Frontend", icon: "🌊" },
-  { name: "Node.js", group: "Backend", icon: "🟩" },
-  { name: "Python", group: "Backend", icon: "🐍" },
-  { name: "APIs REST", group: "Backend", icon: "⚡" },
-  { name: "PostgreSQL", group: "Datos", icon: "🐘" },
-  { name: "MongoDB", group: "Datos", icon: "🍃" },
-  { name: "Git / GitHub", group: "DevOps & Arquitectura", icon: "🐙" },
-  { name: "Clean Architecture", group: "DevOps & Arquitectura", icon: "📐" },
-  { name: "Vercel", group: "DevOps & Arquitectura", icon: "▲" },
+export const SKILLS: SkillGroup[] = [
+  { group: "Backend", items: ["Java", "Spring Boot", "Spring Security + JWT", "NestJS", "Node.js", "Python", "Django REST", "APIs REST", "WebSockets"] },
+  { group: "Frontend y móvil", items: ["React", "Next.js", "TypeScript", "Tailwind CSS", "Vite", "Capacitor (Android)", "Wear OS"] },
+  { group: "Datos", items: ["PostgreSQL", "MongoDB", "H2"] },
+  { group: "Inteligencia artificial", items: ["Google Gemini", "OpenAI API", "Claude"] },
+  { group: "DevOps y calidad", items: ["Docker", "Git / GitHub", "JUnit + Mockito", "Playwright", "Locust", "Swagger", "Render", "Vercel"] },
+  { group: "Videojuegos", items: ["Unity", "C#"] },
 ];
 
 export const LANGUAGES = [
   { name: "Español", level: "Nativo" },
-  { name: "Inglés", level: "Técnico / B2" },
-  { name: "Lorem", level: "Fluido" },
+  { name: "Inglés", level: "B1–B2 · certificado" },
 ];
+
+/** Hitos que se dibujan en la pizarra del taller. */
+export const WHITEBOARD = {
+  timeline: [
+    { year: "2023", label: "Técnico · Digital Akio" },
+    { year: "2024", label: "Ing. de Software" },
+    { year: "2026", label: "SafeCity AI + freelance" },
+  ],
+  diagram: ["Reporte", "IA", "Mapa de calor"],
+  diagramNote: "en tiempo real ⚡",
+};

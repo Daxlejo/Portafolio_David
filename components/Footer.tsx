@@ -2,96 +2,73 @@
 
 import { useEffect, useState } from "react";
 import { NAV_LINKS, PROFILE } from "@/data/portfolio";
-import { GithubIcon, InstagramIcon, LinkedinIcon, MailIcon } from "./Icons";
+import { SocialLinks } from "./Hero";
+import { ArrowUpIcon } from "./Icons";
 
 export default function Footer() {
-  const [year, setYear] = useState(2026);
+  const [year, setYear] = useState<number | null>(null);
   const [showTop, setShowTop] = useState(false);
 
   useEffect(() => {
-    // El año se actualiza solo
+    // El año se calcula en el navegador para que siempre sea el actual
     // eslint-disable-next-line react-hooks/set-state-in-effect
     setYear(new Date().getFullYear());
     const onScroll = () => setShowTop(window.scrollY > 600);
+    onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  const socials = [
-    { href: PROFILE.github, icon: <GithubIcon />, label: "GitHub" },
-    { href: PROFILE.linkedin, icon: <LinkedinIcon />, label: "LinkedIn" },
-    { href: PROFILE.instagram, icon: <InstagramIcon />, label: "Instagram" },
-    { href: `mailto:${PROFILE.email}`, icon: <MailIcon />, label: "Correo" },
-  ];
-
   return (
-    <footer id="footer" className="relative border-t border-line bg-bg-2">
-      <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-accent to-transparent" />
-      <div className="mx-auto grid max-w-7xl gap-10 px-4 py-14 sm:px-6 md:grid-cols-3 lg:px-8">
-        <div>
-          <a href="#inicio" className="flex items-center gap-2 font-mono text-lg font-bold">
-            <span className="grid h-9 w-9 place-items-center rounded-lg border border-accent/50 bg-accent-soft text-accent">{PROFILE.initials}</span>
-            {PROFILE.firstName}
-          </a>
-          <p className="mt-4 max-w-xs text-sm text-muted">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor.</p>
-        </div>
+    <footer id="footer" className="relative z-10 mt-10 border-t border-line">
+      <div className="mx-auto grid max-w-[1180px] gap-8 px-4 pt-[52px] pb-9 sm:px-6 md:grid-cols-[1.2fr_1fr_1fr]">
+        <a href="#inicio" className="flex items-center gap-3 self-start">
+          <span className="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-accent font-mono text-[15px] font-semibold text-accent-ink">
+            {PROFILE.initials}
+          </span>
+          <span>
+            <span className="block font-semibold">{PROFILE.fullName}</span>
+            <span className="text-[12.5px] text-muted">Ingeniero de software · {PROFILE.location}</span>
+          </span>
+        </a>
 
-        <div>
-          <h4 className="mb-4 font-mono text-sm text-accent">{"// enlaces"}</h4>
+        <nav aria-label="Enlaces del pie de página">
+          <h2 className="kicker mb-3.5">{"// enlaces"}</h2>
           <ul className="grid grid-cols-2 gap-2 text-sm">
             {NAV_LINKS.map((l) => (
               <li key={l.id}>
-                <a href={`#${l.id}`} className="text-muted transition hover:pl-1 hover:text-accent">
+                <a href={`#${l.id}`} className="text-muted transition-colors hover:text-accent">
                   {l.label}
                 </a>
               </li>
             ))}
           </ul>
-        </div>
+        </nav>
 
         <div>
-          <h4 className="mb-4 font-mono text-sm text-accent">{"// sígueme"}</h4>
-          <div className="flex gap-3">
-            {socials.map((s) => (
-              <a
-                key={s.label}
-                href={s.href}
-                target="_blank"
-                rel="noreferrer"
-                aria-label={s.label}
-                className="grid h-11 w-11 place-items-center rounded-xl border border-line text-muted transition hover:-translate-y-1 hover:border-accent hover:text-accent"
-              >
-                {s.icon}
-              </a>
-            ))}
-          </div>
-          <p className="mt-6 text-xs text-muted">
+          <h2 className="kicker mb-3.5">{"// sígueme"}</h2>
+          <SocialLinks />
+          <p className="mt-5 text-xs text-muted">
             Prueba <kbd className="rounded border border-line px-1">Ctrl</kbd> + <kbd className="rounded border border-line px-1">K</kbd> o el código Konami 🎮
           </p>
         </div>
       </div>
 
       <div className="border-t border-line">
-        <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-2 px-4 py-5 text-xs text-muted sm:flex-row sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-[1180px] px-4 py-[18px] text-[12.5px] text-muted sm:px-6">
           <p>
-            © {year} {PROFILE.firstName}. Todos los derechos reservados.
-          </p>
-          <p>
-            Hecho con <span className="text-fg">Next.js</span> + <span className="text-fg">TypeScript</span> + <span className="text-fg">Tailwind CSS</span> · Desplegado en{" "}
-            <span className="text-fg">Vercel</span> 💚
+            © <span suppressHydrationWarning>{year ?? ""}</span> {PROFILE.fullName}. Todos los derechos reservados.
           </p>
         </div>
       </div>
 
-      {/* Botón volver arriba */}
       <button
         onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
         aria-label="Volver arriba"
-        className={`fixed bottom-6 right-6 z-40 grid h-12 w-12 place-items-center rounded-full bg-accent text-xl font-bold text-black shadow-[0_0_20px_var(--glow)] transition-all hover:-translate-y-1 ${
-          showTop ? "translate-y-0 opacity-100" : "pointer-events-none translate-y-6 opacity-0"
-        }`}
+        tabIndex={showTop ? 0 : -1}
+        className={`btn btn-icon fixed right-5 bottom-5 z-40 transition-opacity ${showTop ? "opacity-100" : "pointer-events-none opacity-0"}`}
       >
-        ↑
+        <ArrowUpIcon />
       </button>
     </footer>
   );

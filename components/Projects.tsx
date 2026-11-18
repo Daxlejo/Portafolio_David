@@ -1,128 +1,103 @@
-"use client";
-
-import { useRef, type PointerEvent } from "react";
+import Image from "next/image";
 import { PROJECTS, type Project } from "@/data/portfolio";
-import { GithubIcon } from "./Icons";
+import { DownloadIcon, GithubIcon } from "./Icons";
 import Reveal, { SectionTitle } from "./Reveal";
 
-/** Tarjeta con inclinación 3D y foco de luz que sigue al cursor. */
-function ProjectCard({ p }: { p: Project }) {
-  const ref = useRef<HTMLElement>(null);
-
-  const onMove = (e: PointerEvent) => {
-    const el = ref.current!;
-    const r = el.getBoundingClientRect();
-    const x = (e.clientX - r.left) / r.width;
-    const y = (e.clientY - r.top) / r.height;
-    el.style.transform = `perspective(900px) rotateX(${(0.5 - y) * 8}deg) rotateY(${(x - 0.5) * 8}deg) translateY(-4px)`;
-    el.style.setProperty("--mx", `${x * 100}%`);
-    el.style.setProperty("--my", `${y * 100}%`);
-  };
-  const onLeave = () => {
-    if (ref.current) ref.current.style.transform = "";
-  };
-
+/** Botones del proyecto: descargas en sólido, repositorios con borde e ícono de GitHub, "próximamente" deshabilitado. */
+export function ProjectLinks({ p }: { p: Project }) {
+  const size = "h-9 text-[13px]";
   return (
-    <article
-      ref={ref}
-      onPointerMove={onMove}
-      onPointerLeave={onLeave}
-      className="group relative flex h-full flex-col overflow-hidden rounded-3xl border border-line bg-surface transition-[transform,border-color,box-shadow] duration-200 ease-out hover:border-accent/60 hover:shadow-[0_10px_40px_-10px_var(--glow)]"
+    <div className="flex flex-wrap gap-2">
+      {p.links.map((l) => (
+        <a
+          key={l.href}
+          href={l.href}
+          target="_blank"
+          rel="noreferrer"
+          className={`btn ${size} ${l.kind === "download" ? "btn-solid" : ""}`}
+          aria-label={`${l.label}: ${p.title}`}
+        >
+          {l.kind === "github" ? <GithubIcon className="h-4 w-4" /> : <DownloadIcon className="h-4 w-4" />}
+          {l.label}
+        </a>
+      ))}
+      {p.soon.map((t) => (
+        <span key={t} className={`btn btn-off ${size}`} title="Disponible pronto" aria-disabled="true">
+          {t}
+        </span>
+      ))}
+      {!p.links.some((l) => l.kind === "demo") && p.soon.length === 0 && (
+        <span className={`btn btn-off ${size}`} title="Este proyecto no tiene demo web">
+          sin demo
+        </span>
+      )}
+    </div>
+  );
+}
+
+function ProjectCard({ p }: { p: Project }) {
+  const feat = !!p.featured;
+  return (
+    <Reveal
+      as="article"
+      className={`fx card flex flex-col overflow-hidden ${feat ? "md:col-span-2 md:flex-row" : ""}`}
     >
       <div
-        className="pointer-events-none absolute inset-0 z-10 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
-        style={{ background: "radial-gradient(500px circle at var(--mx) var(--my), var(--accent-soft), transparent 40%)" }}
-      />
-      {/* Imagen / miniatura */}
-      <div className={`relative h-56 overflow-hidden bg-gradient-to-br ${p.gradient}`}>
-        <div className="flex items-center gap-1.5 bg-black/30 px-4 py-2.5 backdrop-blur-sm">
-          <span className="h-2.5 w-2.5 rounded-full bg-red-400" />
-          <span className="h-2.5 w-2.5 rounded-full bg-yellow-300" />
-          <span className="h-2.5 w-2.5 rounded-full bg-green-400" />
-          <span className="ml-2 truncate rounded bg-black/25 px-2.5 py-0.5 font-mono text-xs text-white/90">
-            estudy-ai.vercel.app
-          </span>
-          <span className="ml-auto inline-flex items-center gap-1.5 rounded-full bg-accent/20 px-2.5 py-0.5 font-mono text-[11px] text-accent">
-            <span className="h-1.5 w-1.5 rounded-full bg-accent animate-ping" />
-            Proyecto Destacado
-          </span>
-        </div>
-        <div className="grid h-full place-items-center pb-10 text-8xl transition-transform duration-500 group-hover:scale-125 group-hover:rotate-6">
-          {p.emoji}
-        </div>
-        <span className="absolute right-4 top-14 rounded-full bg-black/50 px-3 py-1 font-mono text-xs font-semibold text-white backdrop-blur">
-          {p.category}
+        className={`cover relative aspect-video overflow-hidden border-line bg-bg ${
+          feat ? "border-b md:aspect-auto md:min-h-[320px] md:flex-[0_0_52%] md:border-r md:border-b-0" : "border-b"
+        }`}
+      >
+        <Image
+          src={p.cover}
+          alt={`Portada del proyecto ${p.title}`}
+          fill
+          sizes={feat ? "(min-width: 768px) 600px, 100vw" : "(min-width: 768px) 560px, 100vw"}
+          className="object-cover"
+        />
+        <span className="glass absolute top-3 right-3 z-[1] rounded-full border border-line px-2.5 py-1 font-mono text-[11.5px] font-medium">
+          {p.kind}
         </span>
       </div>
-
-      <div className="relative z-20 flex flex-1 flex-col p-6 sm:p-8">
-        <div className="flex items-center justify-between gap-4">
-          <h3 className="text-2xl font-bold transition group-hover:text-accent sm:text-3xl">{p.title}</h3>
-          <span className="rounded-full border border-accent/40 bg-accent-soft px-3 py-1 font-mono text-xs text-accent">
-            IA & Educación
-          </span>
-        </div>
-        <p className="mt-3 text-base text-muted">{p.description}</p>
-
-        <p className="mt-6 font-mono text-xs font-semibold uppercase tracking-wider text-accent">
-          // Soluciones y Características Clave
-        </p>
-        <ul className="mt-3 space-y-2">
-          {p.solutions.map((s) => (
-            <li key={s} className="flex items-start gap-2.5 text-sm text-muted">
-              <span className="text-accent mt-0.5">▹</span>
-              <span>{s}</span>
-            </li>
-          ))}
-        </ul>
-
-        <div className="mt-6 flex flex-wrap gap-2">
+      <div className="flex flex-1 flex-col gap-1.5 px-5 pt-[18px] pb-5">
+        <p className="font-mono text-xs font-medium text-accent">{p.meta}</p>
+        <h3 className={`font-semibold ${feat ? "text-[22px]" : "text-lg"}`}>{p.title}</h3>
+        <p className="text-sm leading-[1.65] text-muted">{p.text}</p>
+        {p.solutions.length > 0 && (
+          <ul className="mt-1.5 list-disc pl-[18px] text-[13.5px] leading-relaxed marker:text-accent">
+            {p.solutions.map((s) => (
+              <li key={s}>{s}</li>
+            ))}
+          </ul>
+        )}
+        <div className="mt-2.5 flex flex-wrap gap-1.5">
           {p.tech.map((t) => (
-            <span key={t} className="rounded-lg bg-accent-soft px-3 py-1.5 font-mono text-xs text-accent">
+            <span key={t} className="pill">
               {t}
             </span>
           ))}
         </div>
-
-        <div className="mt-8 flex gap-4 pt-4 border-t border-line">
-          <a
-            href={p.github}
-            target="_blank"
-            rel="noreferrer"
-            className="flex flex-1 items-center justify-center gap-2 rounded-xl border border-line py-3 text-sm font-semibold transition hover:border-accent hover:text-accent"
-          >
-            <GithubIcon className="h-4 w-4" /> Código en GitHub
-          </a>
-          <a
-            href={p.demo}
-            target="_blank"
-            rel="noreferrer"
-            className="flex flex-1 items-center justify-center gap-2 rounded-xl bg-accent py-3 text-sm font-bold text-black transition hover:brightness-110 hover:shadow-[0_0_20px_var(--glow)]"
-          >
-            ▲ Ver Demo en Vivo
-          </a>
+        <div className="mt-auto pt-3.5">
+          <ProjectLinks p={p} />
         </div>
       </div>
-    </article>
+    </Reveal>
   );
 }
 
 export default function Projects() {
-  const project = PROJECTS[0];
-
+  const ordered = [...PROJECTS.filter((p) => p.featured), ...PROJECTS.filter((p) => !p.featured)];
   return (
-    <section id="proyectos" className="relative bg-bg-2/60 py-24">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <section id="proyectos" className="relative border-t border-line py-[72px] lg:py-24">
+      <div className="mx-auto max-w-[1180px] px-4 sm:px-6">
         <SectionTitle
-          kicker="02. proyectos"
+          kicker="proyectos"
           title="Mis proyectos"
-          subtitle="Soluciones de software innovadoras, efectivas y fundamentadas en Clean Architecture."
+          subtitle="Proyectos reales, la mayoría en equipo, con su repositorio o su descarga."
         />
-
-        <div className="mx-auto max-w-2xl">
-          <Reveal>
-            <ProjectCard p={project} />
-          </Reveal>
+        <div className="grid gap-[18px] md:grid-cols-2">
+          {ordered.map((p) => (
+            <ProjectCard key={p.id} p={p} />
+          ))}
         </div>
       </div>
     </section>
